@@ -1,27 +1,34 @@
-import type { Metadata } from "next";
-import { Inter, DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const dmSans = DM_Sans({ 
-  subsets: ["latin"], 
-  weight: ["400", "500", "600", "700"], 
-  variable: "--font-body" 
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({ 
-  subsets: ["latin"], 
-  weight: ["500", "600", "700", "800"], 
-  variable: "--font-heading" 
-});
+export const viewport: Viewport = {
+  themeColor: "#2563EB",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
-  title: "Q4Queue — Digital Queue Management & Smart Token System",
-  description: "Transform your waiting experience with Q4Queue. Premium digital queue management for clinics, retail, and service counters.",
+  title: "Q4Queue — Digital Queue Management & Operations Platform",
+  description:
+    "Turn waiting lines into better experiences. Q4Queue helps clinics, banks, service centers, and high-footfall businesses manage digital queues, counter flow, and live customer updates.",
+  keywords: [
+    "digital queue management",
+    "queue system",
+    "token management system",
+    "virtual waiting room",
+    "clinic queue management",
+    "bank queue system",
+    "customer flow software",
+  ],
   icons: {
     icon: "/icon.png",
     apple: "/apple-icon.png",
+  },
+  openGraph: {
+    title: "Q4Queue — Digital Queue Management Platform",
+    description: "Replace physical waiting lines with a smarter digital queue.",
+    type: "website",
+    url: "https://q4queue.com",
   },
 };
 
@@ -31,11 +38,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.className} ${dmSans.variable} ${plusJakartaSans.variable} h-full antialiased`}
-    >
-      <body suppressHydrationWarning className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className="h-full scroll-smooth antialiased" suppressHydrationWarning>
+      <body
+        className="min-h-full flex flex-col bg-background text-foreground selection:bg-blue-100 selection:text-blue-900"
+        suppressHydrationWarning
+      >
+        {children}
+      </body>
     </html>
   );
 }
