@@ -1,6 +1,12 @@
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
+import TrustBar from "@/components/landing/TrustBar";
+import OperationalSolutions from "@/components/landing/OperationalSolutions";
+import ProvenOutcomes from "@/components/landing/ProvenOutcomes";
+import Advantage from "@/components/landing/Advantage";
+import CustomerSpotlight from "@/components/landing/CustomerSpotlight";
 import Industries from "@/components/landing/Industries";
+import EnterpriseSecurity from "@/components/landing/EnterpriseSecurity";
 import HowItWorks from "@/components/landing/HowItWorks";
 import ProductTour from "@/components/landing/ProductTour";
 import CustomerExperience from "@/components/landing/CustomerExperience";
@@ -16,7 +22,13 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <TrustBar />
+        <OperationalSolutions />
+        <ProvenOutcomes />
+        <Advantage />
+        <CustomerSpotlight />
         <Industries />
+        <EnterpriseSecurity />
         <HowItWorks />
         <ProductTour />
         <CustomerExperience />
