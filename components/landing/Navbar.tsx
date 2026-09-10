@@ -15,11 +15,11 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Product", href: "#features", isHash: true },
-  { label: "Solutions", href: "#solutions", isHash: true },
-  { label: "How it works", href: "#how-it-works", isHash: true },
-  { label: "Operations", href: "#operations", isHash: true },
-  { label: "FAQ", href: "#faq", isHash: true },
+  { label: "Product", href: "/product" },
+  { label: "Operations", href: "/operations" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "How it works", href: "/#how-it-works", isHash: true },
+  { label: "FAQ", href: "/#faq", isHash: true },
 ];
 
 export default function Navbar() {
@@ -37,6 +37,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isLightNav = scrolled || pathname === "/get-started";
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     item: NavItem
@@ -44,7 +46,8 @@ export default function Navbar() {
     setMobileOpen(false);
     if (item.isHash && pathname === "/") {
       e.preventDefault();
-      const target = document.querySelector(item.href);
+      const hash = item.href.replace("/", "");
+      const target = document.querySelector(hash);
       if (target) {
         const offset = 80;
         const bodyRect = document.body.getBoundingClientRect().top;
@@ -59,7 +62,7 @@ export default function Navbar() {
       }
     } else if (item.isHash && pathname !== "/") {
       e.preventDefault();
-      router.push("/" + item.href);
+      router.push(item.href);
     }
   };
 
@@ -67,7 +70,7 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
+        isLightNav
           ? "bg-white/92 backdrop-blur-lg border-b border-slate-200/60 shadow-[0_1px_3px_0_rgba(15,23,42,0.03)]"
           : "bg-transparent border-b border-transparent"
       )}
@@ -82,7 +85,7 @@ export default function Navbar() {
             size="md"
             className={cn(
               "transition-all duration-300",
-              !scrolled && "[&_img]:brightness-0 [&_img]:invert"
+              !isLightNav && "[&_img]:brightness-0 [&_img]:invert"
             )}
           />
         </Link>
@@ -99,8 +102,8 @@ export default function Navbar() {
               onClick={(e) => handleNavClick(e, item)}
               className={cn(
                 "text-[14px] font-medium transition-colors",
-                scrolled
-                  ? "text-slate-500 hover:text-slate-900"
+                isLightNav
+                  ? "text-slate-600 hover:text-slate-900"
                   : "text-white/65 hover:text-white"
               )}
             >
@@ -115,7 +118,7 @@ export default function Navbar() {
             href="/login"
             className={cn(
               "hidden sm:inline-flex text-[14px] font-medium transition-colors",
-              scrolled
+              isLightNav
                 ? "text-slate-600 hover:text-slate-900"
                 : "text-white/70 hover:text-white"
             )}
@@ -127,8 +130,8 @@ export default function Navbar() {
             size="sm"
             onClick={() => router.push("/get-started")}
             className={cn(
-              "h-[44px] px-5 text-[14px] font-semibold rounded-[9px] shadow-sm transition-all active:scale-[0.99]",
-              scrolled
+              "h-[44px] px-5 text-[14px] font-semibold rounded-[9px] shadow-sm transition-all active:scale-[0.99] cursor-pointer",
+              isLightNav
                 ? "bg-blue-600 hover:bg-blue-700 text-white"
                 : "bg-white hover:bg-slate-100 text-[#0B1220]"
             )}

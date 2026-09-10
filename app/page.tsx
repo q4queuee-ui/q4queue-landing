@@ -1,6 +1,7 @@
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
 import TrustBar from "@/components/landing/TrustBar";
+import PlatformPillars from "@/components/landing/PlatformPillars";
 import OperationalSolutions from "@/components/landing/OperationalSolutions";
 import ProvenOutcomes from "@/components/landing/ProvenOutcomes";
 import Advantage from "@/components/landing/Advantage";
@@ -23,6 +24,7 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBar />
+        <PlatformPillars />
         <OperationalSolutions />
         <ProvenOutcomes />
         <Advantage />

@@ -4,29 +4,29 @@ import { Logo } from "@/components/ui/Logo";
 
 const footerLinks = {
   product: [
-    { label: "Features", href: "#features" },
-    { label: "How it works", href: "#how-it-works" },
-    { label: "Operations Console", href: "#operations" },
+    { label: "Customer Journey & Pass", href: "/product" },
+    { label: "Staff Operations Console", href: "/operations" },
+    { label: "Business Outcomes & ROI", href: "/solutions" },
     { label: "Get started", href: "/get-started" },
   ],
   solutions: [
-    { label: "Healthcare & Clinics", href: "#solutions" },
-    { label: "Banking & Finance", href: "#solutions" },
-    { label: "Government & Civic", href: "#solutions" },
-    { label: "Service Centers", href: "#solutions" },
-    { label: "Higher Education", href: "#solutions" },
+    { label: "Healthcare & Clinics", href: "/solutions" },
+    { label: "Banking & Finance", href: "/solutions" },
+    { label: "Retail & Flagships", href: "/solutions" },
+    { label: "Entertainment & Leisure", href: "/solutions" },
+    { label: "Civic & Government", href: "/solutions" },
   ],
   resources: [
-    { label: "FAQ", href: "#faq" },
-    { label: "Documentation", href: "#faq" },
-    { label: "Live System Status", href: "#" },
+    { label: "FAQ", href: "/#faq" },
+    { label: "Enterprise Architecture", href: "/solutions" },
+    { label: "Platform Blueprints", href: "/product" },
     { label: "Contact Support", href: "mailto:contact@q4queue.com" },
   ],
   company: [
-    { label: "About Us", href: "/about" },
-    { label: "Contact", href: "/contact" },
-    { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Terms & Conditions", href: "/terms-and-conditions" },
+    { label: "About Us", href: "/solutions" },
+    { label: "Schedule Architecture Review", href: "/get-started" },
+    { label: "Pilot Deployment", href: "/get-started" },
+    { label: "Contact Operations Team", href: "mailto:contact@q4queue.com" },
   ],
 };
 

@@ -38,7 +38,7 @@ const outcomes = [
 
 export default function BusinessValue() {
   return (
-    <section className="py-20 md:py-28 bg-white border-b border-slate-200/80">
+    <section id="business-value" className="py-20 md:py-28 bg-white border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl">
