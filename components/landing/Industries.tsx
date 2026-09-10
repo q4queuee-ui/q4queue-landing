@@ -1,271 +1,423 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
-  Gamepad2,
-  ShoppingBag,
-  Stethoscope,
-  Landmark,
-  Plane,
-  FileCheck2,
   ArrowRight,
-  Layers,
-  Sparkles,
+  CheckCircle2,
+  Clock,
   Building2,
 } from "lucide-react";
 
-interface IndustryCard {
-  title: string;
-  category: string;
-  filterTag: string;
-  proofMetric: string;
+interface IndustryShowcase {
+  id: string;
+  tabLabel: string;
+  tag: string;
+  partnerBrand?: {
+    name: string;
+    subtext?: string;
+  };
+  headline: string;
   description: string;
-  tags: string[];
-  partnerProof: string;
-  icon: React.ElementType;
+  milestones: string[];
+  metrics: {
+    value: string;
+    label: string;
+  }[];
+  image: string;
+  imageAlt: string;
+  previewWidget: {
+    token: string;
+    title: string;
+    status: string;
+    detail: string;
+    countdownLabel: string;
+    primaryAction: string;
+    secondaryAction: string;
+  };
 }
 
-const industries: IndustryCard[] = [
+const showcases: IndustryShowcase[] = [
   {
-    title: "Entertainment & Family Centers",
-    category: "High-Capacity Venues",
-    filterTag: "Entertainment & Leisure",
-    proofMetric: "2.8M+ Guests Served",
+    id: "entertainment",
+    tabLabel: "Entertainment & Leisure",
+    tag: "HIGH-CAPACITY ATTRACTIONS",
+    partnerBrand: {
+      name: "Entertainment & Family Centers",
+      subtext: "AMOEBA • HM LEISURE • ARCADES",
+    },
+    headline:
+      "Eliminating 90-minute waitlist walkaways during peak weekend rushes",
     description:
-      "Orchestrate intense weekend rushes across bowling alleys, VR arenas, and amusement parks. Free guests to explore arcades and dining zones while their live turn approaches.",
-    tags: ["Real-time SMS Turn", "Party & Lane Sync", "Zero Line Chaos"],
-    partnerProof: "Amoeba Bowling & HM Leisure",
-    icon: Gamepad2,
+      "Guests join a virtual queue via smartphone or kiosk, exploring arcades and dining zones freely until their bowling lane or VR arena is prepped.",
+    milestones: [
+      "Real-time lane turnover sync directly from pit manager tablets",
+      "Automated 2-way SMS alerts with 5-minute arrival grace buffer",
+      "Zero lobby clustering or physical barrier stanchions",
+    ],
+    metrics: [
+      { value: "2.8M+", label: "guests served" },
+      { value: "-45%", label: "wait walkaways" },
+    ],
+    image: "/images/amoeba-venue-spotlight.jpg",
+    imageAlt: "Amoeba Bowling & Gaming Center neon illuminated lanes",
+    previewWidget: {
+      token: "TKN #B-42",
+      title: "Lane #14 Ready",
+      status: "Malhotra Party (4)",
+      detail: "Shoe Station Desk A",
+      countdownLabel: "4:32 grace left",
+      primaryAction: "Confirm",
+      secondaryAction: "+5m",
+    },
   },
   {
-    title: "Retail Flagships & Luxury Studios",
-    category: "In-Store Experience",
-    filterTag: "Retail & Flagships",
-    proofMetric: "+28% In-Store Browse",
+    id: "retail",
+    tabLabel: "Retail & Flagships",
+    tag: "IN-STORE LUXURY & BOUTIQUES",
+    partnerBrand: {
+      name: "Luxury Flagships & Studios",
+      subtext: "LORO PIANA • STUDS • FLAGSHIPS",
+    },
+    headline:
+      "Empowering VIP shoppers to browse while styling suites sync",
     description:
-      "Invite VIP shoppers to browse showroom floors instead of standing in lines. Seamlessly manage fitting rooms, personalized styling appointments, and rapid click-and-collect.",
-    tags: ["VIP Stylist Routing", "Fitting Room Queue", "Click & Collect"],
-    partnerProof: "Loro Piana, STUDS & Flagships",
-    icon: ShoppingBag,
+      "Free clientele from waiting lines to discover new collections while stylists prepare private fitting suites or bespoke consultations.",
+    milestones: [
+      "One-tap check-in via discreet tablet stands or QR passes",
+      "Automated client-to-stylist routing based on preference profile",
+      "Instant click-and-collect fulfillment alerts for quick pickup",
+    ],
+    metrics: [
+      { value: "+28%", label: "in-store browse" },
+      { value: "4.9/5", label: "client CSAT" },
+    ],
+    image: "/images/solution-queue-retail.jpg",
+    imageAlt: "Luxury retail showroom floor with personal stylist consultation",
+    previewWidget: {
+      token: "VIP #08",
+      title: "Suite #03 Ready",
+      status: "Elena Vance (Stylist)",
+      detail: "5 garments prepped",
+      countdownLabel: "Reserved 10 mins",
+      primaryAction: "Enter",
+      secondaryAction: "Message",
+    },
   },
   {
-    title: "Healthcare & Clinical Triage",
-    category: "Outpatient & Urgent Care",
-    filterTag: "Healthcare & Clinics",
-    proofMetric: "-45% Waiting Friction",
+    id: "healthcare",
+    tabLabel: "Healthcare & Clinics",
+    tag: "OUTPATIENT & CLINICAL TRIAGE",
+    partnerBrand: {
+      name: "Outpatient Care & Diagnostics",
+      subtext: "CLINICAL TRIAGE NETWORKS",
+    },
+    headline:
+      "Triage walk-in patients by acuity while eliminating waiting rooms",
     description:
-      "Triage walk-in patients by clinical urgency and specialty. Protect vulnerable patients and families from congested waiting rooms with drive-up and remote outdoor waiting.",
-    tags: ["HIPAA Compliant", "Urgency Dispatch", "Outdoor Waiting"],
-    partnerProof: "Diagnostic Labs & Urgent Clinics",
-    icon: Stethoscope,
+      "Protect vulnerable patients by triaging symptom urgency and allowing families to wait comfortably in personal vehicles or outdoor gardens.",
+    milestones: [
+      "HIPAA-compliant, anonymized digital tokens and privacy displays",
+      "Acuity triage prioritizing urgent cases over routine visits",
+      "40% reduction in front-desk administrative check-in friction",
+    ],
+    metrics: [
+      { value: "-35m", label: "lobby wait time" },
+      { value: "100%", label: "HIPAA compliant" },
+    ],
+    image: "/images/solution-healthcare-clinical.jpg",
+    imageAlt: "Serene modern outpatient clinic reception and waiting lounge",
+    previewWidget: {
+      token: "MED #104",
+      title: "Suite 4B Ready",
+      status: "Dr. Alistair Chen",
+      detail: "Room sanitized",
+      countdownLabel: "Ready for patient",
+      primaryAction: "Proceed",
+      secondaryAction: "Assist",
+    },
   },
   {
-    title: "Banking & Private Wealth",
-    category: "Retail Branches",
-    filterTag: "Banking & Finance",
-    proofMetric: "8 min Avg Branch Time",
+    id: "banking",
+    tabLabel: "Banking & Finance",
+    tag: "RETAIL BRANCHES & WEALTH HUBS",
+    partnerBrand: {
+      name: "Commercial & Private Banking",
+      subtext: "RETAIL FINANCIAL HUBS",
+    },
+    headline:
+      "Routing branch walk-ins between tellers and wealth advisors",
     description:
-      "Intelligently route branch walk-ins between express teller windows, commercial loan specialists, and wealth advisors while maintaining a serene, private lobby atmosphere.",
-    tags: ["Teller Load Balancing", "Private Advisory", "Discrete Calling"],
-    partnerProof: "Commercial Banks & Credit Unions",
-    icon: Landmark,
+      "Maintain a tranquil, discrete branch atmosphere by separating quick cash transactions from scheduled advisory consultations.",
+    milestones: [
+      "Dynamic load balancing across express counters and commercial desks",
+      "Direct calendar integration for pre-booked wealth clients",
+      "Multi-branch foot traffic velocity benchmarking",
+    ],
+    metrics: [
+      { value: "8 min", label: "avg service cycle" },
+      { value: "Zero", label: "lobby congestion" },
+    ],
+    image: "/images/solution-banking-advisory.jpg",
+    imageAlt: "Private wealth management advisory suite and bank lobby",
+    previewWidget: {
+      token: "PW #19",
+      title: "Suite #2 Ready",
+      status: "Nicholas Howard (SVP)",
+      detail: "Wealth & Loan Desk",
+      countdownLabel: "Desk ready now",
+      primaryAction: "Check In",
+      secondaryAction: "+5m",
+    },
   },
   {
-    title: "Aviation & Premium Lounges",
-    category: "Transit & Hospitality",
-    filterTag: "Entertainment & Leisure",
-    proofMetric: "99.8% On-Time Boarding",
+    id: "government",
+    tabLabel: "Government & Public",
+    tag: "CIVIC ADMINISTRATION",
+    partnerBrand: {
+      name: "Municipal Halls & Citizen Centers",
+      subtext: "CIVIC SERVICE HUBS",
+    },
+    headline:
+      "Modernizing citizen halls with automated triage and dispatch",
     description:
-      "Eliminate gate congestion and service desk clusters. Seamlessly coordinate VIP lounge entry, priority lane dispatch, and rebooking counters without physical rope lines.",
-    tags: ["VIP Lounge Control", "SMS Boarding Sync", "Priority Lanes"],
-    partnerProof: "British Airways, Delta & Hubs",
-    icon: Plane,
+      "Replace archaic paper tickets with self-service kiosks that route citizens to the appropriate municipal counter with zero confusion.",
+    milestones: [
+      "Multi-lingual kiosk support across 12+ languages",
+      "Real-time synchronized display and audible counter calling",
+      "Dynamic counter reassignment during peak civic deadlines",
+    ],
+    metrics: [
+      { value: "100%", label: "paperless tokens" },
+      { value: "99.9%", label: "dispatch accuracy" },
+    ],
+    image: "/images/solution-government-civic.jpg",
+    imageAlt: "Modern Scandinavian municipal services and citizen hall",
+    previewWidget: {
+      token: "CIV #A-104",
+      title: "Counter 6 Calling",
+      status: "Civil Registry Desk",
+      detail: "Passport & Identity",
+      countdownLabel: "Window active",
+      primaryAction: "Approach",
+      secondaryAction: "Help",
+    },
   },
-  {
-    title: "Government & Citizen Services",
-    category: "Public Administration",
-    filterTag: "Government & Public",
-    proofMetric: "Zero Ticket Hoarding",
-    description:
-      "Retire archaic paper token dispensers. Direct citizens to the correct municipal windows with multi-lingual kiosks, real-time SMS queue updates, and verified document pre-checks.",
-    tags: ["Multi-lingual Kiosks", "Multi-Desk Routing", "Civic Security"],
-    partnerProof: "Municipal Halls & Civic Agencies",
-    icon: FileCheck2,
-  },
-];
-
-const filterCategories = [
-  { id: "All industries", label: "All industries", count: 6 },
-  { id: "Entertainment & Leisure", label: "Entertainment & Leisure", count: 2 },
-  { id: "Retail & Flagships", label: "Retail & Flagships", count: 1 },
-  { id: "Healthcare & Clinics", label: "Healthcare & Clinics", count: 1 },
-  { id: "Banking & Finance", label: "Banking & Finance", count: 1 },
-  { id: "Government & Public", label: "Government & Public", count: 1 },
 ];
 
 export default function Industries() {
-  const [activeFilter, setActiveFilter] = useState("All industries");
-
-  const filteredIndustries =
-    activeFilter === "All industries"
-      ? industries
-      : industries.filter((item) => item.filterTag === activeFilter);
+  const [activeTabId, setActiveTabId] = useState("entertainment");
+  const current =
+    showcases.find((item) => item.id === activeTabId) || showcases[0];
 
   return (
     <section
       id="solutions"
-      className="py-20 md:py-28 bg-white border-b border-slate-200/80 relative overflow-hidden"
+      className="py-16 md:py-24 bg-white border-b border-slate-200/80 relative overflow-hidden"
     >
-      {/* Subtle Atmospheric Gradients */}
-      <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-slate-50/70 to-transparent pointer-events-none" />
-      <div className="absolute -top-32 right-1/4 w-96 h-96 bg-blue-50/40 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Centered Section Header */}
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100 shadow-xs mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>Tailored Operational Blueprints</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-900 tracking-tight leading-tight">
             A trusted partner of industry leaders around the world
           </h2>
-
-          <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            From high-throughput family entertainment arenas and luxury boutiques to clinical triage and municipal halls, Q4Queue powers friction-free physical guest journeys.
+          <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed">
+            From high-throughput family entertainment arenas and luxury boutiques
+            to clinical triage and municipal halls, see how global operators deploy
+            Q4Queue to master customer flow.
           </p>
+        </div>
 
-          {/* Interactive Unified Segmented Capsule Bar */}
-          <div className="mt-8 sm:mt-10 flex items-center justify-center">
-            <div className="inline-flex flex-wrap items-center justify-center p-1.5 rounded-2xl bg-slate-100/90 border border-slate-200/80 gap-1.5 max-w-4xl shadow-xs">
-              {filterCategories.map((category) => {
-                const isActive = activeFilter === category.id;
-                return (
-                  <button
-                    key={category.id}
-                    type="button"
-                    onClick={() => setActiveFilter(category.id)}
-                    className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer flex items-center gap-2 ${
-                      isActive
-                        ? "bg-slate-900 text-white shadow-sm ring-1 ring-slate-900"
-                        : "bg-transparent text-slate-600 hover:text-slate-900 hover:bg-white/80"
-                    }`}
-                  >
-                    <span>{category.label}</span>
-                    <span
-                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold transition-colors ${
-                        isActive
-                          ? "bg-slate-800 text-blue-300"
-                          : "bg-slate-200/70 text-slate-500"
-                      }`}
-                    >
-                      {category.count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+        {/* High-End Border-Bottom Tab Navigation */}
+        <div className="mt-8 sm:mt-10 border-b border-slate-200">
+          <div className="flex items-center gap-6 sm:gap-10 overflow-x-auto no-scrollbar pb-px">
+            {showcases.map((tab) => {
+              const isActive = activeTabId === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTabId(tab.id)}
+                  className={`pb-3 text-sm sm:text-base font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap border-b-2 ${
+                    isActive
+                      ? "border-blue-600 text-blue-600"
+                      : "border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-300"
+                  }`}
+                >
+                  {tab.tabLabel}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Dynamic Elevated Industry Grid */}
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {filteredIndustries.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.title}
-                className="group relative p-7 sm:p-8 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-300 hover:shadow-[0_20px_40px_-15px_rgba(15,23,42,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
-              >
-                {/* Ambient Top Corner Hover Gradient */}
-                <div className="absolute top-0 right-0 w-36 h-36 bg-blue-50/40 rounded-full blur-2xl group-hover:bg-blue-100/50 transition-colors pointer-events-none" />
+        {/* Interactive Showcase: Compact Split-Screen Architecture */}
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* ── LEFT COLUMN (5 Cols): Concise Operational Blueprint ── */}
+          <div className="lg:col-span-5 flex flex-col justify-between h-full">
+            <div>
+              {/* Partner Brand Identity */}
+              <div className="flex items-center gap-2 text-slate-400">
+                <Building2 className="w-4 h-4 text-blue-600 shrink-0" />
+                <span className="text-xs font-bold tracking-wider text-slate-900 uppercase">
+                  {current.partnerBrand?.name}
+                </span>
+                {current.partnerBrand?.subtext && (
+                  <span className="text-[10px] font-semibold text-slate-400 border-l border-slate-200 pl-2">
+                    {current.partnerBrand.subtext}
+                  </span>
+                )}
+              </div>
 
-                <div>
-                  {/* Top Bar: Icon + Proof Metric Pill */}
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-blue-50/90 border border-blue-100/80 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-xs">
-                      <Icon className="w-6 h-6 stroke-[1.8]" />
-                    </div>
+              {/* Tag */}
+              <div className="mt-3">
+                <span className="text-[11px] font-bold tracking-wider uppercase text-blue-600">
+                  {current.tag}
+                </span>
+              </div>
 
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-50 border border-slate-200/80 text-slate-700 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:text-blue-700 transition-colors">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span>{item.proofMetric}</span>
-                    </div>
-                  </div>
+              {/* Concrete Headline */}
+              <h3 className="mt-1.5 text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">
+                {current.headline}
+              </h3>
 
-                  {/* Category & Title */}
-                  <div className="mt-6">
-                    <span className="text-[11px] font-bold tracking-wider uppercase text-blue-600/80">
-                      {item.category}
+              {/* Description - Concise 2 lines */}
+              <p className="mt-2.5 text-sm sm:text-[15px] text-slate-600 leading-relaxed">
+                {current.description}
+              </p>
+
+              {/* Workflow Milestones - Tight single-line statements */}
+              <div className="mt-5 space-y-2.5">
+                {current.milestones.map((milestone) => (
+                  <div key={milestone} className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                    <span className="text-xs sm:text-sm text-slate-700 font-medium">
+                      {milestone}
                     </span>
-                    <h3 className="mt-1 text-xl font-bold text-slate-900 tracking-tight leading-snug group-hover:text-blue-600 transition-colors">
-                      {item.title}
-                    </h3>
                   </div>
+                ))}
+              </div>
+            </div>
 
-                  {/* Description */}
-                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                    {item.description}
-                  </p>
-
-                  {/* Operational Tags */}
-                  <div className="mt-5 flex flex-wrap gap-1.5">
-                    {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-slate-50 text-slate-600 border border-slate-200/60 group-hover:border-blue-100 group-hover:bg-blue-50/40 transition-colors"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+            {/* Metrics & Action Link */}
+            <div className="mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+              <div className="flex items-center gap-7">
+                {current.metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                      {metric.value}
+                    </div>
+                    <div className="text-xs font-medium text-slate-500 mt-0.5">
+                      {metric.label}
+                    </div>
                   </div>
-                </div>
+                ))}
+              </div>
 
-                {/* Footer Bar: Partner Proof & CTA Link */}
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-medium text-slate-500">
-                  <div className="flex items-center gap-1.5 truncate pr-2 text-slate-400">
-                    <Building2 className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span className="truncate">{item.partnerProof}</span>
-                  </div>
+              <Link
+                href="/get-started"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors group/link"
+              >
+                <span>Explore blueprint</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
+              </Link>
+            </div>
+          </div>
 
-                  <Link
-                    href="/get-started"
-                    className="inline-flex items-center gap-1 font-semibold text-blue-600 hover:text-blue-700 shrink-0 group/link"
-                  >
-                    <span>Blueprint</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/link:translate-x-1" />
-                  </Link>
+          {/* ── RIGHT COLUMN (7 Cols): Compact Light-Premium Visual Preview Widget ── */}
+          <div className="lg:col-span-7">
+            <div className="relative h-[340px] sm:h-[400px] w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-900">
+              {/* Background Architectural Venue Image */}
+              <Image
+                key={current.image}
+                src={current.image}
+                alt={current.imageAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover object-center transition-all duration-700"
+              />
+
+              {/* Subtle Ambient Vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
+
+              {/* Top Right Live Tag */}
+              <div className="absolute top-4 right-4 z-20">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold shadow-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Operations Live</span>
                 </div>
               </div>
-            );
-          })}
-        </div>
 
-        {/* Bottom Enterprise Architecture Banner */}
-        <div className="mt-14 sm:mt-16 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-blue-50/70 via-indigo-50/30 to-slate-50 border border-blue-100/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-start sm:items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
-              <Layers className="w-6 h-6 stroke-[1.8]" />
-            </div>
-            <div>
-              <h4 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
-                Operating multi-department or campus-wide facilities?
-              </h4>
-              <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
-                Our enterprise solutions architects build bespoke routing algorithms, custom SMS sender IDs, and ERP integrations tailored for high-volume networks.
-              </p>
+              {/* Compact Light-Premium Live Activity Queue Pass */}
+              <div className="absolute bottom-4 inset-x-4 sm:bottom-5 sm:left-5 sm:right-auto z-20 sm:max-w-[360px] w-auto">
+                <div className="bg-white/90 backdrop-blur-md rounded-xl p-3.5 sm:p-4 shadow-[0_12px_30px_rgba(15,23,42,0.12)] border border-white/80 ring-1 ring-slate-900/5">
+                  {/* Row 1: Calling Title & Token */}
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                      <h4 className="text-sm font-bold text-slate-900 tracking-tight truncate">
+                        {current.previewWidget.title}
+                      </h4>
+                    </div>
+
+                    <span className="text-[10px] font-mono font-semibold bg-slate-100/90 text-slate-600 px-2 py-0.5 rounded border border-slate-200/60 shrink-0">
+                      {current.previewWidget.token}
+                    </span>
+                  </div>
+
+                  {/* Row 2: Party & Location Assignment */}
+                  <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                    <span className="text-slate-800 font-semibold">{current.previewWidget.status}</span>
+                    <span className="text-slate-300">•</span>
+                    <span className="truncate">{current.previewWidget.detail}</span>
+                  </div>
+
+                  {/* Row 3: Slim Timer & Action Buttons */}
+                  <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-medium">
+                      <Clock className="w-3 h-3 text-blue-600 shrink-0" />
+                      <span>{current.previewWidget.countdownLabel}</span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        type="button"
+                        className="px-3 py-1 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 active:scale-98 transition-all shadow-xs cursor-pointer"
+                      >
+                        {current.previewWidget.primaryAction}
+                      </button>
+                      <button
+                        type="button"
+                        className="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 border border-slate-200 active:scale-98 transition-all cursor-pointer"
+                      >
+                        {current.previewWidget.secondaryAction}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto justify-end">
+        {/* Bottom Enterprise Architecture Advisory Callout */}
+        <div className="mt-12 sm:mt-16 p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-5">
+          <div className="max-w-2xl">
+            <h4 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
+              Operating multi-department or campus-wide facilities?
+            </h4>
+            <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Our enterprise solutions architects build custom SMS sender IDs, multi-tier SLAs, and ERP integrations tailored for high-volume physical networks.
+            </p>
+          </div>
+
+          <div className="shrink-0 w-full sm:w-auto">
             <Link
               href="/get-started"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs sm:text-sm font-semibold transition-all shadow-xs hover:shadow-md cursor-pointer"
             >
-              <span>Book architecture review</span>
+              <span>Schedule architecture review</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
