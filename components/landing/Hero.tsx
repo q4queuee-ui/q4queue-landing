@@ -55,143 +55,151 @@ export default function Hero() {
       className="relative overflow-x-clip pt-32 sm:pt-36 lg:pt-40 pb-24 sm:pb-32 lg:pb-36"
       style={{
         background:
-          "linear-gradient(180deg, #070E22 0%, #0A1636 35%, #0C1C46 70%, #09132E 100%)",
+          "linear-gradient(180deg, #030712 0%, #060B18 30%, #0A1636 70%, #070E22 100%)",
       }}
     >
-      {/* ── Atmospheric radial glows behind product area ── */}
+      {/* ── Fine Dot Grid Texture with Radial Fade Mask ── */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.06]"
+        style={{
+          backgroundImage: "radial-gradient(#ffffff 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+          maskImage: "radial-gradient(ellipse 80% 60% at 50% 25%, black 40%, transparent 85%)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 25%, black 40%, transparent 85%)",
+        }}
+      />
+
+      {/* ── Centered Atmospheric Sapphire Bloom ── */}
       <div
         className="absolute pointer-events-none"
         style={{
-          top: "40%",
+          top: "4%",
           left: "50%",
-          transform: "translate(-50%, -30%)",
-          width: "1200px",
-          height: "700px",
+          transform: "translateX(-50%)",
+          width: "1100px",
+          height: "650px",
           background:
-            "radial-gradient(ellipse at center, rgba(37, 99, 235, 0.22) 0%, rgba(37, 99, 235, 0.08) 45%, transparent 70%)",
+            "radial-gradient(ellipse at 50% 20%, rgba(37, 99, 235, 0.24) 0%, rgba(59, 130, 246, 0.08) 45%, transparent 72%)",
+          filter: "blur(30px)",
         }}
       />
       <div
         className="absolute pointer-events-none"
         style={{
-          top: "30%",
-          left: "75%",
-          transform: "translateX(-50%)",
-          width: "700px",
-          height: "500px",
+          top: "42%",
+          left: "50%",
+          transform: "translate(-50%, -20%)",
+          width: "1000px",
+          height: "550px",
           background:
-            "radial-gradient(circle at center, rgba(139, 92, 246, 0.12) 0%, transparent 60%)",
-        }}
-      />
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          top: "55%",
-          left: "15%",
-          transform: "translateX(-50%)",
-          width: "600px",
-          height: "450px",
-          background:
-            "radial-gradient(circle at center, rgba(6, 182, 212, 0.09) 0%, transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(37, 99, 235, 0.16) 0%, rgba(30, 64, 175, 0.05) 50%, transparent 70%)",
         }}
       />
 
       {/* ── Hero Content Header ── */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center">
-        {/* Eyebrow */}
+        {/* Eyebrow Badge */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease }}
-          className="flex items-center justify-center mb-6"
+          className="flex items-center justify-center mb-6 sm:mb-7"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.07] border border-white/[0.12] text-[11px] sm:text-[12px] font-semibold tracking-[0.08em] text-[#AFC4FF] uppercase select-none shadow-sm backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] animate-pulse" />
-            Digital Queue Management & Customer Flow
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.08] border border-white/[0.12] text-[11.5px] font-semibold tracking-wide text-blue-200 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition-all select-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            <span>✦ Next-Gen Virtual Queueing &amp; Flow</span>
           </div>
         </motion.div>
 
-        {/* Headline */}
+        {/* Editorial Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease }}
-          className="text-center text-[40px] sm:text-[60px] md:text-[72px] lg:text-[80px] font-bold tracking-[-0.04em] leading-[1.02] text-white max-w-[880px] mx-auto"
+          className="text-center text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-extrabold tracking-[-0.035em] leading-[1.08] max-w-[920px] mx-auto"
         >
-          Turn waiting lines
+          <span className="bg-gradient-to-b from-white via-slate-100 to-slate-300/85 bg-clip-text text-transparent">
+            Turn waiting lines
+          </span>
           <br />
-          into{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] via-[#93C5FD] to-[#38BDF8]">
-            better experiences.
+          <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(56,189,248,0.25)]">
+            into better experiences.
           </span>
         </motion.h1>
 
-        {/* Supporting Copy */}
+        {/* Authoritative Supporting Copy */}
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.35, ease }}
-          className="text-center mt-6 text-[16px] sm:text-[18px] leading-[1.6] max-w-[660px] mx-auto text-slate-300/85"
+          className="text-center mt-5 sm:mt-6 text-[17px] sm:text-[19px] text-slate-300/90 leading-relaxed max-w-[640px] mx-auto font-normal"
         >
-          Q4Queue helps businesses replace physical queues with a digital customer flow
-          — from check-in to service — giving customers visibility while giving teams
-          complete control.
+          Replace physical waiting lines with intelligent digital customer flow. Empower guests to wait anywhere while giving your staff total operational control.
         </motion.p>
 
-        {/* CTA Group */}
+        {/* Tactile Enterprise CTA Group */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5, ease }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 sm:mt-9"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 mt-8 sm:mt-9"
         >
           <Button
             size="lg"
             onClick={() => router.push("/get-started")}
-            className="h-[48px] px-7 rounded-[10px] bg-white hover:bg-slate-100 text-[#070E22] font-semibold text-[15px] shadow-lg shadow-white/10 flex items-center justify-center gap-2 active:scale-[0.99] transition-all"
+            className="h-[50px] px-8 rounded-xl bg-white hover:bg-slate-100 text-slate-950 font-bold text-[15px] shadow-[0_1px_0_rgba(255,255,255,0.8)_inset,0_12px_28px_-6px_rgba(255,255,255,0.2)] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            Start free
+            <span>Start free</span>
             <ArrowRight className="w-4 h-4" />
           </Button>
 
           <button
             type="button"
             onClick={() => setShowDemo(true)}
-            className="inline-flex items-center justify-center gap-2 h-[48px] px-5 rounded-[10px] text-[15px] font-semibold text-white/80 hover:text-white transition-colors cursor-pointer border border-white/10 hover:border-white/20 bg-white/[0.04]"
+            className="inline-flex items-center justify-center gap-2.5 h-[50px] px-6 rounded-xl text-[15px] font-semibold text-slate-200 hover:text-white bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.14] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] active:scale-[0.98] transition-all cursor-pointer"
           >
-            <Play className="w-3.5 h-3.5 fill-current text-blue-400" />
-            See how it works
+            <span className="w-5 h-5 rounded-md bg-blue-600/30 border border-blue-400/40 flex items-center justify-center">
+              <Play className="w-2.5 h-2.5 fill-current text-blue-400 ml-0.5" />
+            </span>
+            <span>See how it works</span>
           </button>
         </motion.div>
 
-        {/* Trust Signal */}
+        {/* Modernized Social Proof & Trust Strip */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.65, ease }}
-          className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2 mt-8 text-[12px] sm:text-[13px] text-white/60"
+          className="flex items-center justify-center flex-wrap gap-2.5 sm:gap-3.5 mt-8 sm:mt-9"
         >
-          <div className="flex items-center gap-1 text-amber-400">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-            ))}
-            <span className="text-white/80 font-medium ml-1">4.9/5 Rating</span>
+          {/* Rating Pill */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm text-[12.5px] text-white/80">
+            <div className="flex items-center gap-0.5 text-amber-400">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+            <span className="font-semibold text-white">4.9/5</span>
+            <span className="text-white/40">from 1,200+ venues</span>
           </div>
-          <span className="text-white/20 hidden sm:inline">·</span>
-          <span className="flex items-center gap-1.5">
-            <Check className="w-3.5 h-3.5 text-blue-400 stroke-[2.5]" />
-            No hardware required
-          </span>
-          <span className="text-white/20 hidden sm:inline">·</span>
-          <span className="flex items-center gap-1.5">
-            <Check className="w-3.5 h-3.5 text-blue-400 stroke-[2.5]" />
-            Setup in minutes
-          </span>
-          <span className="text-white/20 hidden sm:inline">·</span>
-          <span className="flex items-center gap-1.5">
-            <Check className="w-3.5 h-3.5 text-blue-400 stroke-[2.5]" />
-            Works on any device
-          </span>
+
+          {/* Feature 1 */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.07] text-[12px] text-slate-300 font-medium">
+            <Zap className="w-3.5 h-3.5 text-blue-400" />
+            <span>Zero hardware needed</span>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.07] text-[12px] text-slate-300 font-medium">
+            <Clock className="w-3.5 h-3.5 text-blue-400" />
+            <span>3-minute setup</span>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.07] text-[12px] text-slate-300 font-medium">
+            <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[2.5]" />
+            <span>Any mobile or tablet device</span>
+          </div>
         </motion.div>
       </div>
 
