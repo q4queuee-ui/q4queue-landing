@@ -1,100 +1,163 @@
+"use client";
+
 import {
-  QrCode,
-  Smartphone,
-  Layers,
-  Bell,
-  SplitSquareVertical,
-  LayoutDashboard,
+  MessageSquare,
+  PhoneCall,
+  Clock,
   BarChart3,
-  Network,
+  Tv,
+  QrCode,
+  Layers,
+  Scan,
+  Sparkles,
+  ShieldCheck,
+  LayoutDashboard,
+  Building2,
+  Sliders,
+  Users,
 } from "lucide-react";
 
-interface Feature {
+interface FeatureItem {
+  id: string;
   title: string;
   description: string;
   icon: React.ElementType;
 }
 
-const features: Feature[] = [
+const features: FeatureItem[] = [
   {
-    title: "Digital Queue",
-    description: "Instant QR check-in and self-service token generation with zero hardware requirements.",
-    icon: QrCode,
+    id: "whatsapp",
+    title: "WhatsApp Notification on Every Update",
+    description:
+      "Automated WhatsApp status alerts sent directly to visitors. Real-time ticket confirmation, turn warnings, and counter calls with zero app install.",
+    icon: MessageSquare,
   },
   {
-    title: "Real-time Queue Tracking",
-    description: "Dynamic position updates and wait estimates served directly to the customer's phone browser.",
-    icon: Smartphone,
+    id: "voice-calling",
+    title: "Direct Calling Through Staff Portal",
+    description:
+      "Integrated WebRTC voice calling inside the staff counter dashboard to reach waiting visitors directly in one click.",
+    icon: PhoneCall,
   },
   {
-    title: "Counter Management",
-    description: "Dedicated operator consoles to call, recall, transfer, and complete tickets with a single click.",
-    icon: Layers,
+    id: "session-based",
+    title: "Session-Based Queue Management",
+    description:
+      "Structured shift lifecycles with session token caps, automatic cutoff timers, and historical shift summaries.",
+    icon: Clock,
   },
   {
-    title: "Customer Notifications",
-    description: "Instant browser turn alerts and proximity warnings so visitors arrive promptly at their designated desk.",
-    icon: Bell,
-  },
-  {
-    title: "Multiple Service Types",
-    description: "Categorize walk-ins by department, triage urgency, or specialist service desks within the same lobby.",
-    icon: SplitSquareVertical,
-  },
-  {
-    title: "Live Dashboard",
-    description: "Real-time administrative visibility across all waiting visitors, active counters, and operator statuses.",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Queue Analytics",
-    description: "Track throughput, peak arrival curves, and average consultation times to optimize staffing schedules.",
+    id: "deep-analytics",
+    title: "Deep Complete Analytics & Reports",
+    description:
+      "Comprehensive data metrics tracking peak walk-in curves, staff counter handle times, and one-click CSV export.",
     icon: BarChart3,
   },
   {
-    title: "Multi-location Support",
-    description: "Manage multiple branch offices, clinic sites, or regional facilities from a unified admin console.",
-    icon: Network,
+    id: "live-tv",
+    title: "Live TV Display & Audio Chimes",
+    description:
+      "Transform any Smart TV into a lobby display with real-time ticket status grids and audible turn chime announcements.",
+    icon: Tv,
+  },
+  {
+    id: "totp-qr",
+    title: "Dynamic TOTP Anti-Screenshot QR",
+    description:
+      "Time-based rotating security QR codes that rotate every 10 seconds to prevent screenshot sharing and queue gaming.",
+    icon: QrCode,
+  },
+  {
+    id: "multi-queue",
+    title: "Multi-Queue & Multi-Counter Support",
+    description:
+      "Route visitors to specialized sub-services (Billing, Consultation, VIP) with intelligent dynamic counter allocation.",
+    icon: Layers,
+  },
+  {
+    id: "qr-checkin",
+    title: "Frictionless QR Code Check-in",
+    description:
+      "Visitors scan a simple entrance QR code with their smartphone camera to grab a digital token in under 3 seconds.",
+    icon: Scan,
+  },
+  {
+    id: "premium-experience",
+    title: "Premium Live Experience & ETA",
+    description:
+      "Sleek mobile status page for visitors featuring live position countdowns and dynamic estimated wait time recalculations.",
+    icon: Sparkles,
+  },
+  {
+    id: "enterprise-security",
+    title: "Enterprise Security & Audit Trail",
+    description:
+      "Bank-grade architecture with role-based access control (RBAC), multi-tenant organization isolation, and audit logs.",
+    icon: ShieldCheck,
+  },
+  {
+    id: "live-dashboard",
+    title: "Live Operations Command Dashboard",
+    description:
+      "Real-time administrative control room giving live visibility into total waiting visitors, counter speed, and queue velocity.",
+    icon: LayoutDashboard,
+  },
+  {
+    id: "multi-branch",
+    title: "Multi-Branch Network & Timezones",
+    description:
+      "Centralized organization management across multi-site networks with branch-specific timezones and operating policies.",
+    icon: Building2,
+  },
+  {
+    id: "smart-counter",
+    title: "Smart Counter Routing & Priority Triage",
+    description:
+      "Intelligently balance work across active counters based on staff availability, ticket complexity, and VIP priority flags.",
+    icon: Sliders,
+  },
+  {
+    id: "staff-management",
+    title: "Staff Performance & Desk Delegation",
+    description:
+      "Monitor staff serving speeds, track individual desk handle times, delegate counters, and prevent lobby bottlenecks.",
+    icon: Users,
   },
 ];
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 md:py-28 bg-[#F8FAFC] border-b border-slate-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-xs font-semibold uppercase tracking-wider text-slate-700 mb-3">
-            Core Capabilities
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1220] tracking-[-0.03em] leading-tight">
-            Designed for operational reliability.
+    <section id="features" className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Minimal Left-Aligned Section Header */}
+        <div className="max-w-3xl mb-16 sm:mb-20">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0B1220] tracking-tight leading-[1.15]">
+            From basics to <span className="text-blue-600">advanced</span>.
+            <br />
+            Queue management system that adapts to your needs.
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Everything your organization needs to eliminate physical lines, streamline counter handoffs, and keep operations running smoothly.
-          </p>
         </div>
 
-        {/* 8-Feature Grid */}
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {features.map((f) => {
-            const Icon = f.icon;
+        {/* Minimal 4-Column Feature Grid (No heavy cards, no card borders) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 lg:gap-y-14">
+          {features.map((item) => {
+            const Icon = item.icon;
             return (
-              <div
-                key={f.title}
-                className="p-5 rounded-xl border border-slate-200/90 bg-white hover:border-slate-300 hover:shadow-xs transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 stroke-[1.8]" />
-                  </div>
-                  <h3 className="text-base font-bold text-slate-900 tracking-tight">
-                    {f.title}
-                  </h3>
-                  <p className="mt-2 text-xs sm:text-[13px] text-slate-600 leading-relaxed">
-                    {f.description}
-                  </p>
+              <div key={item.id} className="flex flex-col items-start group">
+                {/* Soft Round Icon Circle */}
+                <div className="w-13 h-13 rounded-full bg-blue-50/90 border border-blue-100 text-blue-600 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300 shadow-2xs">
+                  <Icon className="w-6 h-6 stroke-[1.8]" />
                 </div>
+
+                {/* Minimal Title */}
+                <h3 className="text-base sm:text-lg font-bold text-[#0B1220] tracking-tight leading-snug">
+                  {item.title}
+                </h3>
+
+                {/* Minimal Concise Description */}
+                <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                  {item.description}
+                </p>
               </div>
             );
           })}

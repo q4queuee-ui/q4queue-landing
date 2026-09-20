@@ -1,8 +1,5 @@
-import {
-  Bell,
-  Clock,
-  Coffee,
-} from "lucide-react";
+import Image from "next/image";
+import { Bell, Clock, Coffee } from "lucide-react";
 
 export default function CustomerExperience() {
   return (
@@ -60,87 +57,18 @@ export default function CustomerExperience() {
             </div>
           </div>
 
-          {/* Right Column: Realistic Mobile Web Waiting Screen (6 cols) */}
+          {/* Right Column: Actual Token Mobile Screen Image (6 cols) */}
           <div className="lg:col-span-6 flex justify-center">
-            {/* Realistic Smartphone Shell */}
-            <div className="w-full max-w-[340px] rounded-[32px] border-4 border-slate-900 bg-slate-900 p-2.5 shadow-2xl">
-              {/* Screen Interior */}
-              <div className="bg-white rounded-[24px] overflow-hidden border border-slate-200">
-                {/* Mobile Browser Top Bar */}
-                <div className="bg-slate-100 px-4 py-2.5 border-b border-slate-200 flex items-center justify-between text-[11px] text-slate-500">
-                  <span className="truncate max-w-[190px] font-mono text-slate-600">
-                    q4queue.com/wait/downtown
-                  </span>
-                  <span className="text-[10px] font-semibold text-slate-400">9:42 AM</span>
-                </div>
-
-                {/* Application Header */}
-                <div className="px-5 pt-4 pb-3 border-b border-slate-100 flex items-center justify-between">
-                  <div>
-                    <div className="text-[11px] font-bold text-blue-600 uppercase tracking-wider">
-                      Q4Queue
-                    </div>
-                    <div className="text-sm font-bold text-slate-900 leading-tight mt-0.5">
-                      Downtown Clinic
-                    </div>
-                  </div>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    You&apos;re in line
-                  </span>
-                </div>
-
-                {/* Main Waiting Card Content */}
-                <div className="p-5 text-center space-y-4">
-                  <div>
-                    <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                      Your Token
-                    </div>
-                    <div className="mt-1 text-5xl font-extrabold font-mono text-slate-900 tracking-tight">
-                      #48
-                    </div>
-                    <div className="text-xs text-slate-500 mt-1">General Consultation</div>
-                  </div>
-
-                  {/* Operational Status Box */}
-                  <div className="rounded-xl bg-slate-50 border border-slate-200/90 p-3.5 space-y-2 text-left">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-500 font-medium">Currently serving:</span>
-                      <span className="font-bold text-slate-900 font-mono">#45 (Counter 01)</span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-500 font-medium">Ahead of you:</span>
-                      <span className="font-semibold text-blue-600">3 people ahead</span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-200/60">
-                      <span className="text-slate-500 font-medium">Estimated wait:</span>
-                      <span className="font-bold text-slate-900 font-mono">~8 min</span>
-                    </div>
-                  </div>
-
-                  {/* Reassurance Message */}
-                  <div className="p-3 rounded-lg bg-blue-50/70 border border-blue-100 text-left">
-                    <p className="text-xs text-blue-900 font-medium leading-relaxed">
-                      &ldquo;We&apos;ll let you know when it&apos;s your turn. Feel free to wait nearby.&rdquo;
-                    </p>
-                  </div>
-
-                  {/* Alert Preference Action */}
-                  <div className="pt-2 text-left">
-                    <div className="flex items-center justify-between text-[11px] text-slate-600 pb-2">
-                      <span>Vibrate on call:</span>
-                      <span className="font-semibold text-emerald-600">Enabled</span>
-                    </div>
-                    <button className="w-full py-2 px-3 rounded-lg border border-slate-200 text-xs font-medium text-slate-500 hover:text-slate-700 bg-white">
-                      Leave queue / cancel ticket
-                    </button>
-                  </div>
-                </div>
-
-                {/* Bottom Safe Indicator */}
-                <div className="h-4 bg-slate-100 flex items-center justify-center">
-                  <div className="w-24 h-1 bg-slate-300 rounded-full" />
-                </div>
+            <div className="relative w-full max-w-[340px] rounded-[32px] border-4 border-slate-900 bg-slate-900 p-2 shadow-2xl">
+              <div className="rounded-[24px] overflow-hidden bg-white">
+                <Image
+                  src="/images/token-mobile-screen.png"
+                  alt="Q4Queue Visitor Mobile Screen"
+                  width={700}
+                  height={1400}
+                  className="w-full h-auto object-cover"
+                  unoptimized
+                />
               </div>
             </div>
           </div>

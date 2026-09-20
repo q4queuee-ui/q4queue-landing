@@ -98,106 +98,106 @@ const showcases: IndustryShowcase[] = [
     previewWidget: {
       title: "Elena Vance (Stylist)",
       details: "Fitting Room 03 • 5 Items Prepped",
-      countdownLabel: "Styling suite reserved",
-      timeRemaining: "10 min hold",
-      progressPercent: "88%",
+      countdownLabel: "Stylist Ready",
+      timeRemaining: "Suite Prepared",
+      progressPercent: "100%",
       primaryAction: "Enter Suite",
-      secondaryAction: "Message",
+      secondaryAction: "Notify Staff",
     },
   },
   {
     id: "healthcare",
     tabLabel: "Healthcare & Clinics",
-    tag: "OUTPATIENT & CLINICAL TRIAGE",
+    tag: "CLINICAL TRIAGE & DIAGNOSTICS",
     partnerBrand: {
-      name: "Outpatient Care & Diagnostics",
-      subtext: "CLINICAL TRIAGE NETWORKS",
+      name: "Outpatient & Triage Centers",
+      subtext: "CLINICS • URGENT CARE • LABS",
     },
     headline:
-      "Triage walk-in patients by acuity while eliminating waiting rooms",
+      "Restoring lobby safety and peace for waiting patients",
     description:
-      "Protect vulnerable patients by triaging symptom urgency and allowing families to wait comfortably in personal vehicles or outdoor gardens.",
+      "Patients check in seamlessly and wait comfortably in their vehicles or outdoor gardens until called for triage or bloodwork.",
     milestones: [
-      "HIPAA-compliant, anonymized digital tokens and privacy displays",
-      "Acuity triage prioritizing urgent cases over routine visits",
-      "40% reduction in front-desk administrative check-in friction",
+      "HIPAA-compliant tokenized queue identifiers",
+      "Urgency priority triage override for critical arrivals",
+      "Automated SMS recall with counter direction guidelines",
     ],
     metrics: [
-      { value: "-35m", label: "lobby wait time" },
-      { value: "100%", label: "HIPAA compliant" },
+      { value: "14 min", label: "avg handle time" },
+      { value: "-60%", label: "lobby overcrowding" },
     ],
     image: "/images/solution-healthcare-clinical.jpg",
-    imageAlt: "Serene modern outpatient clinic reception and waiting lounge",
+    imageAlt: "Modern clinical reception desk with quiet waiting area",
     previewWidget: {
-      title: "Dr. Alistair Chen",
-      details: "Exam Suite 4B • Vitals Prepped",
-      countdownLabel: "Called from vehicle",
-      timeRemaining: "Active",
+      title: "Token #H-204",
+      details: "Blood Work & Lab Station 02",
+      countdownLabel: "Triage Call",
+      timeRemaining: "Counter Ready",
       progressPercent: "95%",
-      primaryAction: "Proceed to Room",
-      secondaryAction: "Assist",
+      primaryAction: "Proceed to Station",
+      secondaryAction: "Delay 5m",
     },
   },
   {
     id: "banking",
-    tabLabel: "Banking & Finance",
-    tag: "RETAIL BRANCHES & WEALTH HUBS",
+    tabLabel: "Banking & Advisory",
+    tag: "FINANCIAL SERVICES & ADVISORY",
     partnerBrand: {
-      name: "Commercial & Private Banking",
-      subtext: "RETAIL FINANCIAL HUBS",
+      name: "Financial Branches & Advisory",
+      subtext: "WEALTH MANAGEMENT • BANKING",
     },
     headline:
-      "Routing branch walk-ins between tellers and wealth advisors",
+      "Seamless VIP routing and appointment check-in for bank branches",
     description:
-      "Maintain a tranquil, discrete branch atmosphere by separating quick cash transactions from scheduled advisory consultations.",
+      "Walk-in banking customers and pre-scheduled wealth management clients are automatically routed to the right specialized officer.",
     milestones: [
-      "Dynamic load balancing across express counters and commercial desks",
-      "Direct calendar integration for pre-booked wealth clients",
-      "Multi-branch foot traffic velocity benchmarking",
+      "Dynamic counter balancing based on transaction complexity",
+      "VIP priority dispatch for premium account holders",
+      "Integrated teller desk calling console with WebRTC direct call",
     ],
     metrics: [
-      { value: "8 min", label: "avg service cycle" },
-      { value: "Zero", label: "lobby congestion" },
+      { value: "-35%", label: "wait duration" },
+      { value: "98%", label: "on-time visits" },
     ],
     image: "/images/solution-banking-advisory.jpg",
-    imageAlt: "Private wealth management advisory suite and bank lobby",
+    imageAlt: "Modern financial branch desk with advisor meeting",
     previewWidget: {
-      title: "Nicholas Howard (SVP)",
-      details: "Private Wealth & Commercial Desk",
-      countdownLabel: "Advisory consultation ready",
-      timeRemaining: "Ready now",
-      progressPercent: "90%",
-      primaryAction: "Check In at Desk",
-      secondaryAction: "+5m",
+      title: "Advisory Desk 04",
+      details: "Commercial Loan Consultation",
+      countdownLabel: "Officer Assigned",
+      timeRemaining: "Serving Now",
+      progressPercent: "100%",
+      primaryAction: "Begin Session",
+      secondaryAction: "Re-assign",
     },
   },
   {
     id: "government",
-    tabLabel: "Government & Public",
-    tag: "CIVIC ADMINISTRATION",
+    tabLabel: "Public & Civic Services",
+    tag: "MUNICIPAL & CIVIC CENTERS",
     partnerBrand: {
-      name: "Municipal Halls & Citizen Centers",
-      subtext: "CIVIC SERVICE HUBS",
+      name: "Civic Halls & Public Desks",
+      subtext: "PASSPORT • PERMITS • CIVIC HALLS",
     },
     headline:
-      "Modernizing citizen halls with automated triage and dispatch",
+      "Transforming high-volume municipal halls with smart triage",
     description:
-      "Replace archaic paper tickets with self-service kiosks that route citizens to the appropriate municipal counter with zero confusion.",
+      "Handle thousands of daily civic walk-ins across multiple departments with automated counter routing and clear digital TV screens.",
     milestones: [
-      "Multi-lingual kiosk support across 12+ languages",
-      "Real-time synchronized display and audible counter calling",
-      "Dynamic counter reassignment during peak civic deadlines",
+      "Multi-service ticket generation at entrance kiosks",
+      "Lobby Smart TV status screens with audible chime calls",
+      "Comprehensive daily throughput analytics for supervisors",
     ],
     metrics: [
-      { value: "100%", label: "paperless tokens" },
-      { value: "99.9%", label: "dispatch accuracy" },
+      { value: "10k+", label: "daily visitors" },
+      { value: "< 2 min", label: "avg check-in" },
     ],
     image: "/images/solution-government-civic.jpg",
-    imageAlt: "Modern Scandinavian municipal services and citizen hall",
+    imageAlt: "Civic service hall with digital queue screens",
     previewWidget: {
-      title: "Counter 6 — Civil Registry",
-      details: "Passport & Identity Renewal",
-      countdownLabel: "Please approach window with docs",
+      title: "Counter 12 (Permits)",
+      details: "Ticket #G-108 • Document Review",
+      countdownLabel: "Please approach window",
       timeRemaining: "Window open",
       progressPercent: "85%",
       primaryAction: "Approach Window",
@@ -214,24 +214,22 @@ export default function Industries() {
   return (
     <section
       id="solutions"
-      className="py-16 md:py-24 bg-white border-b border-slate-200/80 relative overflow-hidden"
+      className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl">
-          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-900 tracking-tight leading-tight">
-            A trusted partner of industry leaders around the world
+        <div className="max-w-3xl mb-12 sm:mb-14">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1220] tracking-tight leading-[1.15]">
+            A trusted partner of industry leaders around the world.
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed">
-            From high-throughput family entertainment arenas and luxury boutiques
-            to clinical triage and municipal halls, see how global operators deploy
-            Q4Queue to master customer flow.
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            From high-capacity entertainment arenas and luxury flagships to clinical triage and municipal halls, see how operators deploy Q4Queue to master customer flow.
           </p>
         </div>
 
-        {/* High-End Border-Bottom Tab Navigation */}
-        <div className="mt-8 sm:mt-10 border-b border-slate-200">
-          <div className="flex items-center gap-6 sm:gap-10 overflow-x-auto no-scrollbar pb-px">
+        {/* Premium Minimal Segmented Tab Navigation Bar */}
+        <div className="mb-12">
+          <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl bg-slate-100/90 border border-slate-200/80">
             {showcases.map((tab) => {
               const isActive = activeTabId === tab.id;
               return (
@@ -239,10 +237,10 @@ export default function Industries() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTabId(tab.id)}
-                  className={`pb-3 text-sm sm:text-base font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap border-b-2 ${
+                  className={`px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm transition-all duration-200 cursor-pointer font-semibold ${
                     isActive
-                      ? "border-blue-600 text-blue-600"
-                      : "border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-300"
+                      ? "bg-white text-[#0B1220] shadow-sm border border-slate-200/80 scale-[1.02]"
+                      : "text-slate-600 hover:text-[#0B1220] hover:bg-white/60"
                   }`}
                 >
                   {tab.tabLabel}
@@ -252,15 +250,15 @@ export default function Industries() {
           </div>
         </div>
 
-        {/* Interactive Showcase: Compact Split-Screen Architecture */}
-        <div className="mt-10 sm:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* ── LEFT COLUMN (5 Cols): Concise Operational Blueprint ── */}
+        {/* Interactive Showcase: Sleek Split-Screen Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          {/* LEFT COLUMN (5 Cols): Operational Blueprint */}
           <div className="lg:col-span-5 flex flex-col justify-between h-full">
             <div>
               {/* Partner Brand Identity */}
-              <div className="flex items-center gap-2 text-slate-400">
+              <div className="flex items-center gap-2 text-slate-500 mb-3">
                 <Building2 className="w-4 h-4 text-blue-600 shrink-0" />
-                <span className="text-xs font-bold tracking-wider text-slate-900 uppercase">
+                <span className="text-xs font-bold tracking-wider text-[#0B1220] uppercase">
                   {current.partnerBrand?.name}
                 </span>
                 {current.partnerBrand?.subtext && (
@@ -271,28 +269,28 @@ export default function Industries() {
               </div>
 
               {/* Tag */}
-              <div className="mt-3">
+              <div>
                 <span className="text-[11px] font-bold tracking-wider uppercase text-blue-600">
                   {current.tag}
                 </span>
               </div>
 
-              {/* Concrete Headline */}
-              <h3 className="mt-1.5 text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">
+              {/* Headline */}
+              <h3 className="mt-2 text-xl sm:text-2xl font-bold text-[#0B1220] tracking-tight leading-snug">
                 {current.headline}
               </h3>
 
-              {/* Description - Concise 2 lines */}
-              <p className="mt-2.5 text-sm sm:text-[15px] text-slate-600 leading-relaxed">
+              {/* Description */}
+              <p className="mt-3 text-sm sm:text-[15px] text-slate-600 leading-relaxed font-normal">
                 {current.description}
               </p>
 
-              {/* Workflow Milestones - Tight single-line statements */}
-              <div className="mt-5 space-y-2.5">
+              {/* Workflow Milestones */}
+              <div className="mt-6 space-y-3">
                 {current.milestones.map((milestone) => (
-                  <div key={milestone} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                    <span className="text-xs sm:text-sm text-slate-700 font-medium">
+                  <div key={milestone} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    <span className="text-xs sm:text-sm text-slate-700 font-medium leading-normal">
                       {milestone}
                     </span>
                   </div>
@@ -301,11 +299,11 @@ export default function Industries() {
             </div>
 
             {/* Metrics & Action Link */}
-            <div className="mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-              <div className="flex items-center gap-7">
+            <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+              <div className="flex items-center gap-8">
                 {current.metrics.map((metric) => (
                   <div key={metric.label}>
-                    <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#0B1220] tracking-tight">
                       {metric.value}
                     </div>
                     <div className="text-xs font-medium text-slate-500 mt-0.5">
@@ -317,7 +315,7 @@ export default function Industries() {
 
               <Link
                 href="/get-started"
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors group/link"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors group/link"
               >
                 <span>Explore blueprint</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
@@ -325,10 +323,10 @@ export default function Industries() {
             </div>
           </div>
 
-          {/* ── RIGHT COLUMN (7 Cols): Standard Ultra-Premium Live Activity Queue Pass ── */}
+          {/* RIGHT COLUMN (7 Cols): Venue Photo & Live Widget Overlay */}
           <div className="lg:col-span-7">
-            <div className="relative h-[340px] sm:h-[400px] w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-900">
-              {/* Background Architectural Venue Image */}
+            <div className="relative h-[340px] sm:h-[420px] w-full rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-900">
+              {/* Architectural Venue Image */}
               <Image
                 key={current.image}
                 src={current.image}
@@ -338,23 +336,22 @@ export default function Industries() {
                 className="object-cover object-center transition-all duration-700"
               />
 
-              {/* Subtle Ambient Vignette */}
+              {/* Ambient Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
 
               {/* Top Right Live Tag */}
               <div className="absolute top-4 right-4 z-20">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold shadow-xs">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <span>Operations Live</span>
                 </div>
               </div>
 
-              {/* Standard Ultra-Premium Live Activity Queue Pass */}
-              <div className="absolute bottom-4 inset-x-4 sm:bottom-5 sm:left-5 sm:right-auto z-20 sm:max-w-[370px] w-auto">
-                <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-4 sm:p-4.5 border border-white/90 shadow-[0_20px_45px_-10px_rgba(15,23,42,0.22)] ring-1 ring-slate-900/5">
-                  {/* Calling Title & Details */}
+              {/* Live Ticket Pass Overlay Widget */}
+              <div className="absolute bottom-4 inset-x-4 sm:bottom-5 sm:left-5 sm:right-auto z-20 sm:max-w-[360px] w-auto">
+                <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-4.5 border border-white/90 shadow-xl ring-1 ring-slate-900/5">
                   <div>
-                    <h4 className="text-base font-extrabold text-slate-900 tracking-tight leading-snug">
+                    <h4 className="text-base font-extrabold text-[#0B1220] tracking-tight leading-snug">
                       {current.previewWidget.title}
                     </h4>
                     <p className="text-xs font-semibold text-slate-500 mt-0.5">
@@ -362,66 +359,26 @@ export default function Industries() {
                     </p>
                   </div>
 
-                  {/* Row 3: Countdown Header & Slim Progress Track */}
                   <div className="mt-3.5 pt-2.5 border-t border-slate-100">
                     <div className="flex items-center justify-between gap-2 text-[11px] font-medium text-slate-500 mb-1.5">
                       <div className="flex items-center gap-1.5 min-w-0 truncate">
-                        <Clock className="w-3 h-3 text-blue-600 shrink-0" />
+                        <Clock className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                         <span className="truncate">{current.previewWidget.countdownLabel}</span>
                       </div>
                       <span className="font-mono text-[10.5px] text-slate-400 shrink-0">
                         {current.previewWidget.timeRemaining}
                       </span>
                     </div>
-                    <div className="w-full h-1 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-blue-600 to-blue-500 transition-all duration-500"
+                        className="h-full rounded-full bg-blue-600 transition-all duration-500"
                         style={{ width: current.previewWidget.progressPercent }}
                       />
                     </div>
                   </div>
-
-                  {/* Row 4: Tactile Action Controls */}
-                  <div className="mt-3.5 flex items-center gap-2">
-                    <button
-                      type="button"
-                      className="flex-1 py-2 px-3.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-98 transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
-                    >
-                      <span>{current.previewWidget.primaryAction}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                    <button
-                      type="button"
-                      className="py-2 px-3 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200/80 active:scale-98 transition-all cursor-pointer"
-                    >
-                      <span>{current.previewWidget.secondaryAction}</span>
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Bottom Enterprise Architecture Advisory Callout */}
-        <div className="mt-12 sm:mt-16 p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-5">
-          <div className="max-w-2xl">
-            <h4 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
-              Operating multi-department or campus-wide facilities?
-            </h4>
-            <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Our enterprise solutions architects build custom SMS sender IDs, multi-tier SLAs, and ERP integrations tailored for high-volume physical networks.
-            </p>
-          </div>
-
-          <div className="shrink-0 w-full sm:w-auto">
-            <Link
-              href="/get-started"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs sm:text-sm font-semibold transition-all shadow-xs hover:shadow-md cursor-pointer"
-            >
-              <span>Schedule architecture review</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </div>
       </div>

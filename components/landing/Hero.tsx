@@ -107,7 +107,7 @@ export default function Hero() {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.08] border border-white/[0.12] text-[11.5px] font-semibold tracking-wide text-blue-200 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition-all select-none">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-            <span>✦ Next-Gen Virtual Queueing &amp; Flow</span>
+            <span>Next-Gen Virtual Queueing &amp; Flow</span>
           </div>
         </motion.div>
 
@@ -146,10 +146,10 @@ export default function Hero() {
         >
           <Button
             size="lg"
-            onClick={() => router.push("/get-started")}
+            onClick={() => router.push("/pricing")}
             className="h-[50px] px-8 rounded-xl bg-white hover:bg-slate-100 text-slate-950 font-bold text-[15px] shadow-[0_1px_0_rgba(255,255,255,0.8)_inset,0_12px_28px_-6px_rgba(255,255,255,0.2)] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>Start free</span>
+            <span>Start 14-Day Free Trial</span>
             <ArrowRight className="w-4 h-4" />
           </Button>
 

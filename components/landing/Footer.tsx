@@ -4,28 +4,23 @@ import { Logo } from "@/components/ui/Logo";
 
 const footerLinks = {
   product: [
-    { label: "Customer Journey & Pass", href: "/product" },
-    { label: "Staff Operations Console", href: "/operations" },
-    { label: "Business Outcomes & ROI", href: "/solutions" },
-    { label: "Get started", href: "/get-started" },
+    { label: "How it works", href: "/#how-it-works" },
+    { label: "Get started", href: "/pricing" },
   ],
   solutions: [
-    { label: "Healthcare & Clinics", href: "/solutions" },
-    { label: "Banking & Finance", href: "/solutions" },
-    { label: "Retail & Flagships", href: "/solutions" },
-    { label: "Entertainment & Leisure", href: "/solutions" },
-    { label: "Civic & Government", href: "/solutions" },
+    { label: "Healthcare & Clinics", href: "/pricing" },
+    { label: "Banking & Finance", href: "/pricing" },
+    { label: "Retail & Flagships", href: "/pricing" },
+    { label: "Entertainment & Leisure", href: "/pricing" },
+    { label: "Civic & Government", href: "/pricing" },
   ],
   resources: [
     { label: "FAQ", href: "/#faq" },
-    { label: "Enterprise Architecture", href: "/solutions" },
-    { label: "Platform Blueprints", href: "/product" },
     { label: "Contact Support", href: "mailto:contact@q4queue.com" },
   ],
   company: [
-    { label: "About Us", href: "/solutions" },
-    { label: "Schedule Architecture Review", href: "/get-started" },
-    { label: "Pilot Deployment", href: "/get-started" },
+    { label: "Schedule Architecture Review", href: "/pricing/custom" },
+    { label: "Pilot Deployment", href: "/pricing/custom" },
     { label: "Contact Operations Team", href: "mailto:contact@q4queue.com" },
   ],
 };

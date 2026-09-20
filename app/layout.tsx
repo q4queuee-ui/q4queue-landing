@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import ClientProviders from "@/components/ClientProviders";
 
 export const viewport: Viewport = {
   themeColor: "#2563EB",
@@ -43,7 +44,9 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-background text-foreground selection:bg-blue-100 selection:text-blue-900"
         suppressHydrationWarning
       >
-        {children}
+        <ClientProviders>
+          {children}
+        </ClientProviders>
       </body>
     </html>
   );
