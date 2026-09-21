@@ -405,7 +405,7 @@ export default function LaunchPage() {
                   href="/"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-[13.5px] font-semibold shadow-md shadow-blue-600/20 transition-all active:scale-[0.98]"
                 >
-                  <span>Explore Live Platform</span>
+                  <span>Explore Live</span>
                   <ArrowRight className="w-4 h-4 text-white" />
                 </Link>
               </div>
@@ -569,6 +569,7 @@ export default function LaunchPage() {
                         src="/images/dr-azhari-portrait.png"
                         alt="Dr. Muhammed Abdul Hakim Azhari - Official Inaugurator"
                         fill
+                        sizes="(max-width: 640px) 144px, 176px"
                         className="object-cover"
                         priority
                       />
@@ -747,6 +748,7 @@ export default function LaunchPage() {
                     src="/images/jazbayos-poster-speakers.png"
                     alt="Jazbayos 11th Edition Speakers Poster"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     priority
                   />
@@ -780,6 +782,7 @@ export default function LaunchPage() {
                     src="/images/jazbayos-poster-eye.png"
                     alt="Jazbayos 11th Edition Loop Out Poster"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     priority
                   />
@@ -919,6 +922,7 @@ export default function LaunchPage() {
                   src={activeLightbox.src}
                   alt={activeLightbox.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 672px"
                   className="object-contain"
                   priority
                 />
