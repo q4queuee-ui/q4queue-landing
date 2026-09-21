@@ -12,20 +12,23 @@ import {
   ExternalLink,
   Volume2,
   Bell,
-  CheckCircle2,
   Award,
   X,
   Maximize2,
   ChevronRight,
   Radio,
   Check,
+  Clock,
+  Building2,
+  GraduationCap,
+  ShieldCheck,
 } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
 /* ──────────────────────────────────────────────────────────
    Acoustic Queue Chime (Web Audio API)
-   Synthesizes a refined hospital / executive lounge chime
+   Synthesizes a refined hospital / executive consultation chime
    ────────────────────────────────────────────────────────── */
 function playAcousticChime() {
   if (typeof window === "undefined") return;
@@ -69,13 +72,13 @@ function playAcousticChime() {
     osc2.start(now + 0.14);
     osc2.stop(now + 0.95);
   } catch {
-    // Silently continue if audio context is blocked
+    // Audio context silently handled if user hasn't interacted yet
   }
 }
 
 /* ──────────────────────────────────────────────────────────
    Celebratory Gala Foil Canvas (Optimized for Light Background)
-   Warm metallic gold, deep sapphire blue, emerald, and bronze
+   Warm metallic amber, royal sapphire, emerald, and gold
    ────────────────────────────────────────────────────────── */
 interface GalaParticle {
   x: number;
@@ -99,15 +102,14 @@ function GalaCelebrationCanvas({ triggerCount }: { triggerCount: number }) {
   const animFrameId = useRef<number | null>(null);
 
   const spawnGalaBurst = useCallback((originX: number, originY: number, count = 65) => {
-    // Rich gala palette with high contrast on light paper canvas
     const palette = [
       "#D97706", // Warm Amber Gold
-      "#B45309", // Deep Bronze Gold
+      "#B45309", // Deep Bronze
       "#2563EB", // Royal Sapphire
       "#1D4ED8", // Navy Blue
       "#059669", // Emerald Green
       "#F59E0B", // Bright Gold
-      "#475569", // Slate
+      "#E11D48", // Rose Red
     ];
 
     const newParticles: GalaParticle[] = [];
@@ -143,12 +145,12 @@ function GalaCelebrationCanvas({ triggerCount }: { triggerCount: number }) {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
-    spawnGalaBurst(w * 0.25, h * 0.8, 60);
-    spawnGalaBurst(w * 0.75, h * 0.8, 60);
+    spawnGalaBurst(w * 0.28, h * 0.75, 60);
+    spawnGalaBurst(w * 0.72, h * 0.75, 60);
 
     const timer = setTimeout(() => {
-      spawnGalaBurst(w * 0.5, h * 0.65, 80);
-    }, 240);
+      spawnGalaBurst(w * 0.5, h * 0.6, 75);
+    }, 220);
 
     return () => clearTimeout(timer);
   }, [triggerCount, spawnGalaBurst]);
@@ -229,18 +231,22 @@ function GalaCelebrationCanvas({ triggerCount }: { triggerCount: number }) {
 }
 
 /* ──────────────────────────────────────────────────────────
-   Main Launch Page Component (Light Architectural Theme)
+   Main Launch Page Component (Senior Architectural Design)
    ────────────────────────────────────────────────────────── */
 export default function LaunchPage() {
   const [hasMounted, setHasMounted] = useState(false);
   const [celebrationCount, setCelebrationCount] = useState(0);
-  const [showToast, setShowToast] = useState(false);
+  const [wishesCount, setWishesCount] = useState(164);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Interactive Live Product Cockpit State
   const [currentToken, setCurrentToken] = useState(104);
   const [calledCount, setCalledCount] = useState(42);
   const [isCalling, setIsCalling] = useState(false);
   const [lastCalledTime, setLastCalledTime] = useState("Just now");
+
+  // Festival Program Tabs (Day 1, Day 2, Day 3)
+  const [activeDay, setActiveDay] = useState<1 | 2 | 3>(1);
 
   // Poster Lightbox Modal State
   const [activeLightbox, setActiveLightbox] = useState<{
@@ -254,7 +260,7 @@ export default function LaunchPage() {
     setHasMounted(true);
     const timer = setTimeout(() => {
       setCelebrationCount(1);
-    }, 700);
+    }, 600);
     return () => clearTimeout(timer);
   }, []);
 
@@ -266,11 +272,18 @@ export default function LaunchPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleTriggerCelebration = () => {
+  const triggerToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3800);
+  };
+
+  const handleSendCongratulations = () => {
+    setWishesCount((prev) => prev + 1);
     setCelebrationCount((c) => c + 1);
     playAcousticChime();
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3600);
+    triggerToast("Inaugural Congratulations Recorded · Thank You for Celebrating With Us!");
   };
 
   const handleCallNextToken = () => {
@@ -278,14 +291,17 @@ export default function LaunchPage() {
     setIsCalling(true);
     playAcousticChime();
 
-    setCurrentToken((prev) => prev + 1);
+    const nextNumber = currentToken + 1;
+    setCurrentToken(nextNumber);
     setCalledCount((prev) => prev + 1);
     setLastCalledTime("Just now");
     setCelebrationCount((c) => c + 1);
 
+    triggerToast(`Broadcasting Token #A-${nextNumber} to Counter 03 Display & SMS Dispatch`);
+
     setTimeout(() => {
       setIsCalling(false);
-    }, 900);
+    }, 850);
   };
 
   return (
@@ -297,194 +313,183 @@ export default function LaunchPage() {
 
       {/* Floating Commemorative Toast */}
       <AnimatePresence>
-        {showToast && (
+        {toastMessage && (
           <motion.div
-            initial={{ opacity: 0, y: -16, scale: 0.97 }}
+            initial={{ opacity: 0, y: -16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -16, scale: 0.97 }}
+            exit={{ opacity: 0, y: -16, scale: 0.96 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+            className="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none px-4 max-w-lg w-full text-center"
           >
-            <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-900/95 border border-amber-400/40 shadow-[0_10px_30px_rgba(0,0,0,0.15)] text-amber-200 text-[13px] font-medium tracking-tight">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>Inaugural Commemoration Confirmed &middot; Q4Queue is Live</span>
+            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-slate-900/95 border border-amber-400/40 shadow-[0_12px_32px_rgba(0,0,0,0.18)] text-amber-200 text-[12.5px] font-medium tracking-tight">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+              <span>{toastMessage}</span>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ─── Ambient Stage Atmosphere (Warm Editorial Light) ─── */}
+      {/* ─── Ambient Stage Atmosphere (Architectural Warm Light) ─── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        {/* Soft Sapphire Overhead Bloom */}
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[480px]"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[520px]"
           style={{
             background:
-              "radial-gradient(ellipse at 50% -10%, rgba(37, 99, 235, 0.07) 0%, rgba(245, 158, 11, 0.03) 40%, transparent 70%)",
+              "radial-gradient(ellipse at 50% -10%, rgba(37, 99, 235, 0.08) 0%, rgba(245, 158, 11, 0.04) 40%, transparent 70%)",
           }}
         />
       </div>
 
       <main className="relative z-10 pt-28 sm:pt-36">
 
-        {/* ─── 1. Editorial Hero & Ceremonial Milestone ─── */}
-        <section className="relative px-6 max-w-5xl mx-auto text-center pb-20 sm:pb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Inaugural Milestone Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 shadow-sm mb-7">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="text-[12.5px] font-medium tracking-wide text-amber-900">
-                Official Inauguration &middot; 21 September 2026 &middot; Markaz Garden, Poonoor
-              </span>
-            </div>
-
-            {/* Display Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.035em] text-slate-900 leading-[1.08] max-w-4xl mx-auto mb-6">
-              The Architecture of Waiting,{" "}
-              <span className="block mt-1.5 text-blue-600">
-                Reinvented for the World.
-              </span>
-            </h1>
-
-            {/* Editorial Lead Paragraph */}
-            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed mb-4 font-normal">
-              Q4Queue was formally inaugurated today on the opening stage of the{" "}
-              <strong className="text-slate-900 font-semibold">11th Jazbayos &mdash; Dihliz Life Festival</strong>.
-              Engineered to replace chaotic waiting lines with quiet, precise digital customer flow.
-            </p>
-
-            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-9 flex items-center justify-center gap-2">
-              <span>Inaugurated by</span>
-              <strong className="text-slate-800 font-semibold">Dr. Muhammed Abdul Hakim Azhari</strong>
-            </p>
-
-            {/* Tactile Action Buttons (High Craft Light Pairing) */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-lg mx-auto">
-              {/* Ceremonial Action Button: Amber & Gold Foil */}
-              <button
-                type="button"
-                onClick={handleTriggerCelebration}
-                className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-amber-50 hover:bg-amber-100/80 border border-amber-300 text-amber-950 text-[14px] font-semibold shadow-sm hover:shadow transition-all duration-200 active:scale-[0.98] cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-amber-600 group-hover:rotate-12 transition-transform duration-300" />
-                <span>Trigger Inauguration Celebration</span>
-              </button>
-
-              {/* Primary Royal Blue Button */}
-              <Link
-                href="/"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-[14px] font-semibold shadow-md shadow-blue-600/20 transition-all duration-200 active:scale-[0.98]"
-              >
-                <span>Explore Live Platform</span>
-                <ArrowRight className="w-4 h-4 text-white" />
-              </Link>
-            </div>
-
-            {/* Quiet Citation Anchor */}
-            <div className="mt-8">
-              <a
-                href="#inauguration-tribute"
-                className="inline-flex items-center gap-1 text-[12.5px] font-medium text-slate-500 hover:text-blue-600 transition-colors"
-              >
-                <span>Read Dr. Azhari&apos;s Inaugural Citation &amp; Address</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* ─── 2. Hardware-Grade Operational Console (Cockpit - Light Edition) ─── */}
-        <section className="relative px-6 max-w-5xl mx-auto pb-28">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7 }}
-          >
-            {/* Section Tag */}
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-mono uppercase tracking-wider mb-2">
-                <Radio className="w-3 h-3 text-blue-600 animate-pulse" />
-                <span>Live Interactive Operational Console</span>
+        {/* ─── 1. ASYMMETRIC EDITORIAL HERO & LIVE INTEGRATED COCKPIT ─── */}
+        <section className="relative px-6 sm:px-8 max-w-7xl mx-auto pb-24 sm:pb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            
+            {/* Left Column (58%): Editorial Provenance, Narrative & Actions */}
+            <div className="lg:col-span-7 space-y-6 text-left">
+              
+              {/* Provenance Badge */}
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="text-[12px] font-mono font-semibold tracking-wider text-amber-900 uppercase">
+                  Official Inauguration &middot; 21 September 2026 &middot; Poonoor, Calicut
+                </span>
               </div>
-              <p className="text-xs sm:text-[13px] text-slate-500">
-                Experience the real-time dispatcher &mdash; click <strong className="text-slate-800">&ldquo;Call Next Token&rdquo;</strong> to test audio chime, counter display, and SMS routing.
+
+              {/* Master Display Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.035em] text-slate-900 leading-[1.07]">
+                The Architecture of Waiting,{" "}
+                <span className="text-blue-600 block sm:inline">
+                  Formally Inaugurated.
+                </span>
+              </h1>
+
+              {/* Editorial Lead Paragraph */}
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal">
+                Q4Queue was formally launched today on the main stage of the{" "}
+                <strong className="text-slate-900 font-semibold">11th Jazbayos &mdash; Dihliz Life Festival</strong> by revered educator and social reformer{" "}
+                <strong className="text-slate-900 font-semibold">Dr. Muhammed Abdul Hakim Azhari</strong>. Engineered to replace physical queue congestion with whisper-quiet, real-time customer flow.
               </p>
-            </div>
 
-            {/* White Instrument Panel Card */}
-            <div className="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-9 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06)]">
-              {/* Header Telemetry Bar */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100">
-                <div>
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
-                    Active Station
-                  </div>
-                  <div className="text-[15px] font-bold text-slate-900 mt-0.5">
-                    Counter 03 &middot; Executive Consultation (Dr. Azhari Medical Wing)
-                  </div>
+              {/* "Loop Out" Philosophy Capsule */}
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100/80 border border-slate-200/90 text-xs sm:text-[13px] text-slate-700 max-w-xl">
+                <div className="px-2 py-0.5 rounded bg-emerald-100 border border-emerald-300 text-emerald-800 font-mono text-[11px] font-bold shrink-0 mt-0.5">
+                  LOOP OUT
                 </div>
-
-                <div className="flex items-center gap-3 text-[12px]">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-700 font-mono text-[11px]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    WebSocket Sync &lt; 28ms
-                  </span>
-                  <span className="text-slate-500 hidden sm:inline font-mono">
-                    Served: <strong className="text-slate-800">{calledCount}</strong>
-                  </span>
-                </div>
+                <p className="leading-snug">
+                  Echoing the 11th Jazbayos theme &mdash; breaking free from the repetitive loops of conventional life &mdash; Q4Queue liberates institutions and visitors from the tyranny of waiting lines.
+                </p>
               </div>
 
-              {/* Main Console Split */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 items-center">
-                {/* Left: Station Display Terminal */}
-                <div className="lg:col-span-7 flex flex-col items-center justify-center p-8 rounded-xl bg-slate-950 text-white border border-slate-800 shadow-inner relative">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2.5 py-0.5 rounded text-[11px] font-mono uppercase tracking-wider bg-amber-400/20 border border-amber-400/30 text-amber-300">
-                      Now Serving
-                    </span>
-                    {isCalling && (
-                      <span className="text-[11px] text-amber-300 font-medium flex items-center gap-1 animate-pulse">
-                        <Volume2 className="w-3 h-3" /> Broadcasting chime...
-                      </span>
-                    )}
+              {/* Participatory CTAs & Guestbook Counter */}
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 max-w-xl">
+                {/* Participatory Guestbook Blessing Button */}
+                <button
+                  type="button"
+                  onClick={handleSendCongratulations}
+                  className="group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-b from-amber-50 to-amber-100/90 hover:from-amber-100 hover:to-amber-200/90 border border-amber-300/90 text-amber-950 text-[13.5px] font-semibold shadow-sm hover:shadow transition-all active:scale-[0.98] cursor-pointer"
+                >
+                  <span className="text-base group-hover:scale-125 transition-transform duration-200">👏</span>
+                  <span>Send Congratulations</span>
+                  <span className="px-2 py-0.5 rounded-full bg-amber-200/80 text-[11.5px] font-mono font-bold text-amber-900">
+                    {wishesCount} Wishes
+                  </span>
+                </button>
+
+                {/* Direct Platform Exploration */}
+                <Link
+                  href="/"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-[13.5px] font-semibold shadow-md shadow-blue-600/20 transition-all active:scale-[0.98]"
+                >
+                  <span>Explore Live Platform</span>
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </Link>
+              </div>
+
+              {/* Provenance Micro-Details */}
+              <div className="pt-2 flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-slate-500 font-mono">
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-slate-400" />
+                  Live since 09:00 AM IST
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                  Dihliz World School, Markaz Garden
+                </span>
+                <a
+                  href="#inauguration-tribute"
+                  className="text-blue-600 hover:underline inline-flex items-center gap-0.5 font-medium"
+                >
+                  <span>Read Inaugural Citation</span>
+                  <ChevronRight className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column (42%): Hardware-Grade Live Cockpit (Above the Fold) */}
+            <div className="lg:col-span-5">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.15 }}
+                className="relative rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-7 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.08)]"
+              >
+                {/* Cockpit Top Bar */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <div>
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                        Operational Dispatch
+                      </div>
+                      <div className="text-[13px] font-bold text-slate-900">
+                        Counter 03 &middot; Consultation Wing
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Monospace Token Display */}
+                  <span className="px-2 py-1 rounded bg-slate-100 text-slate-600 text-[11px] font-mono">
+                    Sync: &lt; 24ms
+                  </span>
+                </div>
+
+                {/* Physical-Style Token Display Chamber */}
+                <div className="my-5 p-6 rounded-xl bg-slate-950 text-white border border-slate-800 relative overflow-hidden shadow-inner text-center">
+                  {/* Subtle corner tech guides */}
+                  <div className="absolute top-2 left-2 text-[9px] font-mono text-slate-600 uppercase">DISPATCH.SYS</div>
+                  <div className="absolute top-2 right-2 text-[9px] font-mono text-emerald-400 flex items-center gap-1">
+                    <Radio className="w-2.5 h-2.5" /> LIVE
+                  </div>
+
+                  <div className="text-[11px] font-mono uppercase tracking-widest text-amber-400 mb-2">
+                    Now Serving
+                  </div>
+
+                  {/* High-Fidelity Monospace Token */}
                   <div
-                    className={`text-6xl sm:text-7xl lg:text-8xl font-black font-mono tracking-tight transition-all duration-200 tabular-nums ${
+                    className={`text-5xl sm:text-6xl font-black font-mono tracking-tight tabular-nums transition-all duration-200 ${
                       isCalling
-                        ? "text-amber-300 drop-shadow-[0_0_25px_rgba(245,158,11,0.5)]"
+                        ? "text-amber-300 drop-shadow-[0_0_20px_rgba(245,158,11,0.6)]"
                         : "text-white"
                     }`}
                   >
                     #A-{currentToken}
                   </div>
 
-                  <div className="text-[12px] text-slate-400 mt-2 font-medium">
-                    Priority Lane &middot; Routed to Counter 03
+                  <div className="text-[11px] text-slate-400 mt-1 font-mono">
+                    Priority Lane &middot; Station Active
                   </div>
 
-                  {/* Up Next Pill Row */}
-                  <div className="flex items-center gap-2 mt-6 text-[11px] text-slate-400 font-mono">
-                    <span>Queued:</span>
-                    <span className="px-2 py-0.5 rounded bg-white/10 border border-white/15 text-slate-200">
-                      #A-{currentToken + 1}
-                    </span>
-                    <span className="px-2 py-0.5 rounded bg-white/10 border border-white/15 text-slate-300">
-                      #A-{currentToken + 2}
-                    </span>
-                    <span className="px-2 py-0.5 rounded bg-white/10 border border-white/15 text-slate-400">
-                      #A-{currentToken + 3}
-                    </span>
+                  {/* Upcoming Tokens Pill */}
+                  <div className="flex items-center justify-center gap-1.5 mt-4 text-[11px] text-slate-400 font-mono">
+                    <span className="text-slate-500 text-[10px]">Queued:</span>
+                    <span className="px-1.5 py-0.5 rounded bg-white/10 text-slate-200">#A-{currentToken + 1}</span>
+                    <span className="px-1.5 py-0.5 rounded bg-white/10 text-slate-300">#A-{currentToken + 2}</span>
+                    <span className="px-1.5 py-0.5 rounded bg-white/10 text-slate-400">#A-{currentToken + 3}</span>
                   </div>
 
                   {/* Tactile Call Next Token Button */}
@@ -492,140 +497,140 @@ export default function LaunchPage() {
                     type="button"
                     onClick={handleCallNextToken}
                     disabled={isCalling}
-                    className="mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-[13.5px] font-semibold shadow-lg shadow-blue-600/30 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-70"
+                    className="mt-5 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-[13px] font-semibold shadow-lg shadow-blue-600/30 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-75"
                   >
                     <Volume2 className="w-4 h-4" />
-                    <span>{isCalling ? "Calling Station..." : `Call Next Token (#A-${currentToken + 1})`}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-blue-200" />
+                    <span>{isCalling ? "Broadcasting Chime..." : `Call Next Token (#A-${currentToken + 1})`}</span>
                   </button>
                 </div>
 
-                {/* Right: Visitor Smartphone Card */}
-                <div className="lg:col-span-5 space-y-4">
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                    <Bell className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Instant Visitor Notification (Zero App)</span>
+                {/* Instant Alert Simulator Box */}
+                <div className="rounded-xl bg-emerald-50/80 border border-emerald-200/90 p-3.5 space-y-2 text-left">
+                  <div className="flex items-center justify-between text-[11.5px]">
+                    <span className="font-bold text-emerald-900 flex items-center gap-1.5">
+                      <Bell className="w-3.5 h-3.5 text-emerald-700" />
+                      Zero-App Instant Notification
+                    </span>
+                    <span className="font-mono text-[10.5px] text-emerald-700">{lastCalledTime}</span>
                   </div>
 
-                  {/* Simulated Mobile Alert Card */}
-                  <div className="rounded-xl bg-emerald-50/70 border border-emerald-200 p-5 shadow-sm">
-                    <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-100 border border-emerald-200 flex items-center justify-center shrink-0">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                      </div>
-                      <div className="space-y-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[12px] font-bold text-emerald-900">
-                            Q4Queue Instant Alert
-                          </span>
-                          <span className="text-[11px] font-mono text-emerald-700">{lastCalledTime}</span>
-                        </div>
-                        <p className="text-[12.5px] text-slate-700 leading-relaxed">
-                          Your turn has arrived. <strong className="text-slate-900 font-semibold">Token #A-{currentToken}</strong> is now called at <strong className="text-emerald-800 font-semibold">Counter 03</strong>. Please proceed to the consultation suite.
-                        </p>
-                        <div className="pt-2 flex items-center gap-1.5 text-[11px] text-emerald-700 font-mono">
-                          <Check className="w-3 h-3 text-emerald-600" />
-                          <span>WhatsApp &amp; SMS sent without app install</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <p className="text-[12px] text-slate-700 leading-snug">
+                    &ldquo;Your turn has arrived. <strong className="text-slate-900">Token #A-{currentToken}</strong> is now called at <strong className="text-emerald-800">Counter 03</strong>.&rdquo;
+                  </p>
 
-                  {/* Key Metrics */}
-                  <div className="grid grid-cols-2 gap-3 pt-1">
-                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
-                      <div className="text-[11px] text-slate-500 font-mono">Average Wait</div>
-                      <div className="text-xl font-bold text-slate-900 mt-0.5 tabular-nums">4.2 min</div>
-                      <div className="text-[11px] text-emerald-600 font-medium mt-0.5">↓ 68% reduction</div>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
-                      <div className="text-[11px] text-slate-500 font-mono">App Friction</div>
-                      <div className="text-xl font-bold text-slate-900 mt-0.5">0 Apps</div>
-                      <div className="text-[11px] text-blue-600 font-medium mt-0.5">100% Web &amp; QR</div>
-                    </div>
+                  <div className="flex items-center gap-2 pt-1 text-[10.5px] text-emerald-800 font-mono">
+                    <Check className="w-3 h-3 text-emerald-600" />
+                    <span>Simulated WhatsApp &amp; SMS Dispatch</span>
                   </div>
                 </div>
-              </div>
+
+                {/* Telemetry Footer */}
+                <div className="grid grid-cols-3 gap-2 pt-3 text-center">
+                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                    <div className="text-[10px] text-slate-400 font-mono">Served</div>
+                    <div className="text-[13px] font-bold text-slate-800 tabular-nums">{calledCount}</div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                    <div className="text-[10px] text-slate-400 font-mono">Avg Wait</div>
+                    <div className="text-[13px] font-bold text-emerald-700">4.2m</div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                    <div className="text-[10px] text-slate-400 font-mono">Hardware</div>
+                    <div className="text-[13px] font-bold text-blue-600">Pure Web</div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+
+          </div>
         </section>
 
-        {/* ─── 3. Executive Dignitary Citation: Dr. Muhammed Abdul Hakim Azhari ─── */}
-        <section id="inauguration-tribute" className="relative px-6 max-w-4xl mx-auto pb-28 scroll-mt-24">
+        {/* ─── 2. CEREMONIAL MONOGRAPH: DR. MUHAMMED ABDUL HAKIM AZHARI ─── */}
+        <section id="inauguration-tribute" className="relative px-6 sm:px-8 max-w-5xl mx-auto pb-28 scroll-mt-24">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7 }}
           >
-            {/* Section Tag */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-mono tracking-wider uppercase mb-2">
-                <Award className="w-3.5 h-3.5 text-amber-600" />
-                <span>Ceremonial Citation</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-                Inaugurated with Distinction &amp; Gratitude
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                Commemorating the formal inaugural address delivered at Jazbayos 2026.
-              </p>
-            </div>
+            {/* Architectural Citation Plaque (Warm Ivory & Gold Frame) */}
+            <div className="rounded-3xl bg-[#FDFCF7] border border-amber-200/90 p-8 sm:p-12 shadow-[0_8px_30px_rgba(15,23,42,0.05)] relative overflow-hidden">
+              {/* Gold Filigree Header Trim */}
+              <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500" />
 
-            {/* Architectural Commemorative Plaque (Warm Ivory Citation Frame) */}
-            <div className="rounded-2xl bg-[#FDFCF7] border border-amber-200/90 p-8 sm:p-12 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.05)] relative overflow-hidden">
-              {/* Subtle top gold accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500" />
-
-              {/* Dignitary Profile Bar */}
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 pb-7 border-b border-amber-100 text-center sm:text-left">
-                <div className="w-16 h-16 rounded-xl bg-amber-100/70 border border-amber-200/80 flex items-center justify-center shrink-0 shadow-sm">
-                  <Award className="w-8 h-8 text-amber-700" />
-                </div>
-                <div>
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-amber-800 font-semibold mb-1">
-                    Official Inaugurator &middot; Patron of Knowledge &amp; Innovation
+              {/* Dignitary Profile Split */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-8 border-b border-amber-200/70">
+                
+                {/* Left: Authentic Portrait of Dr. Azhari */}
+                <div className="md:col-span-4 flex flex-col items-center text-center">
+                  <div className="relative w-36 h-48 sm:w-44 sm:h-56 rounded-2xl overflow-hidden border-2 border-amber-300 shadow-md bg-white p-1">
+                    <div className="relative w-full h-full rounded-xl overflow-hidden">
+                      <Image
+                        src="/images/dr-azhari-portrait.png"
+                        alt="Dr. Muhammed Abdul Hakim Azhari - Official Inaugurator"
+                        fill
+                        className="object-cover"
+                        priority
+                      />
+                    </div>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                  <div className="mt-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-100/70 border border-amber-300/80 text-[11px] font-mono font-bold text-amber-900">
+                    <Award className="w-3 h-3 text-amber-700" />
+                    <span>Official Inaugurator</span>
+                  </div>
+                </div>
+
+                {/* Right: Dignitary Profile & Institutional Legacy */}
+                <div className="md:col-span-8 space-y-3 text-left">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-amber-800 font-semibold flex items-center gap-1.5">
+                    <GraduationCap className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Patron of Knowledge &amp; Social Innovation</span>
+                  </div>
+
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                     Dr. Muhammed Abdul Hakim Azhari
-                  </h3>
-                  <p className="text-[13px] text-slate-600 mt-0.5">
-                    Founder, <em className="not-italic text-slate-800 font-medium">Dihliz World School</em> &middot; Director, <em className="not-italic text-slate-800 font-medium">Markaz Knowledge Garden</em>
-                  </p>
-                </div>
-              </div>
+                  </h2>
 
-              {/* Dignified Monograph Body */}
-              <div className="pt-7 space-y-5 text-[14.5px] sm:text-[15px] text-slate-700 leading-relaxed font-normal">
-                <p>
-                  On 21 September 2026, during the inaugural assembly of the{" "}
-                  <strong className="text-slate-900 font-semibold">Jazbayos &mdash; Dihliz Life Festival (11th Edition)</strong>,
-                  Dr. Muhammed Abdul Hakim Azhari formally launched Q4Queue before educators, scholars, community leaders, and students at Markaz Garden, Poonoor.
-                </p>
+                  <div className="space-y-1 text-[13.5px] text-slate-600">
+                    <p className="flex items-center gap-2">
+                      <Building2 className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span>Founder, <strong className="text-slate-800 font-semibold">Dihliz World School</strong></span>
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <Building2 className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span>Director, <strong className="text-slate-800 font-semibold">Markaz Knowledge Garden</strong>, Poonoor</span>
+                    </p>
+                  </div>
 
-                <p>
-                  As an eminent educator and social innovator, Dr. Azhari has long championed learning environments that unite ethical leadership with contemporary technology. His gracious inauguration of Q4Queue marks an auspicious beginning for our endeavor to eliminate friction, anxiety, and wasted hours from public spaces.
-                </p>
-
-                {/* Editorial Pull Quote (Serif Italic for Authentic Human Warmth) */}
-                <div className="my-6 p-6 rounded-xl bg-white border-l-4 border-amber-500 text-slate-800 font-serif italic text-base sm:text-lg leading-relaxed shadow-sm">
-                  &ldquo;Technology reaches its highest moral purpose when it restores dignity and peace to people&apos;s most precious resource: their time.&rdquo;
+                  {/* Keynote Pull Quote */}
+                  <div className="mt-4 p-5 rounded-xl bg-white border-l-4 border-amber-500 shadow-sm text-slate-800 font-serif italic text-base sm:text-lg leading-relaxed">
+                    &ldquo;Technology reaches its highest moral purpose when it restores dignity and peace to people&apos;s most precious resource: their time.&rdquo;
+                  </div>
                 </div>
 
-                <p className="text-xs sm:text-[13px] text-slate-500 italic">
-                  We express our deepest respect and gratitude to Dr. Azhari and the organizing committee of Jazbayos for this memorable inauguration.
+              </div>
+
+              {/* Historical Context Monograph */}
+              <div className="pt-8 space-y-4 text-[14.5px] text-slate-700 leading-relaxed">
+                <p>
+                  On 21 September 2026, during the opening ceremony of the{" "}
+                  <strong className="text-slate-900 font-semibold">11th Jazbayos &mdash; Dihliz Life Festival</strong>,
+                  Dr. Muhammed Abdul Hakim Azhari inaugurated Q4Queue before an assembly of educators, community leaders, technology visionaries, and scholars at Markaz Garden, Poonoor.
+                </p>
+                <p>
+                  Known internationally for pioneering educational institutions that integrate ethical human character with contemporary technical mastery, Dr. Azhari commended Q4Queue&apos;s objective to eliminate waiting anxiety and restore order, civility, and efficiency to healthcare centers, universities, and public institutions.
                 </p>
               </div>
 
-              {/* Metadata Badges */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-7 mt-7 border-t border-amber-100 text-xs text-slate-500">
-                <div className="flex flex-wrap items-center gap-4">
+              {/* Archival Registry Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-4 pt-8 mt-8 border-t border-amber-200/70 text-xs text-slate-500 font-mono">
+                <div className="flex flex-wrap items-center gap-5">
                   <span className="inline-flex items-center gap-1.5 text-slate-700 font-medium">
-                    <Calendar className="w-3.5 h-3.5 text-amber-600" />
+                    <Calendar className="w-3.5 h-3.5 text-amber-700" />
                     21 September 2026
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-slate-700 font-medium">
-                    <MapPin className="w-3.5 h-3.5 text-amber-600" />
+                    <MapPin className="w-3.5 h-3.5 text-amber-700" />
                     Markaz Garden, Poonoor, Calicut
                   </span>
                 </div>
@@ -634,50 +639,108 @@ export default function LaunchPage() {
                   href="https://www.dihlizworldschool.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-amber-800 hover:text-amber-900 transition-colors font-semibold"
+                  className="inline-flex items-center gap-1.5 text-amber-800 hover:text-amber-950 font-bold transition-colors"
                 >
                   <span>dihlizworldschool.com</span>
-                  <ExternalLink className="w-3 h-3" />
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
+
             </div>
           </motion.div>
         </section>
 
-        {/* ─── 4. Architectural Museum Exhibition (Jazbayos Posters) ─── */}
-        <section className="relative px-6 max-w-5xl mx-auto pb-28">
+        {/* ─── 3. JAZBAYOS FESTIVAL EXHIBITION PAVILION ("LOOP OUT") ─── */}
+        <section className="relative px-6 sm:px-8 max-w-6xl mx-auto pb-28">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7 }}
           >
-            {/* Section Tag */}
-            <div className="text-center mb-10">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-[11px] font-mono tracking-wider uppercase mb-2">
-                <span>Festival Exhibition</span>
+            {/* Section Tag & Headline */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-mono tracking-wider uppercase mb-2">
+                <span>Festival Exhibition Pavilion</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
                 Jazbayos &middot; Dihliz Life Festival
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto mt-1.5">
-                11th Edition &middot; Theme: <strong className="text-slate-800 font-semibold">&ldquo;Loop Out&rdquo;</strong> &middot; 21, 22 &amp; 23 September 2026
+                11th Edition &middot; Curated by Dihliz World School &middot; 21, 22 &amp; 23 September 2026
               </p>
             </div>
 
-            {/* Gallery Exhibits */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 max-w-4xl mx-auto">
-              {/* Exhibit 1: Dignitaries & Programme */}
+            {/* 3-Day Program Tabs */}
+            <div className="flex items-center justify-center gap-2 mb-10">
+              <button
+                type="button"
+                onClick={() => setActiveDay(1)}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeDay === 1
+                    ? "bg-slate-900 text-white shadow-sm"
+                    : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
+                }`}
+              >
+                Day 1 &middot; Inaugural Launch (21 Sep)
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveDay(2)}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeDay === 2
+                    ? "bg-slate-900 text-white shadow-sm"
+                    : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
+                }`}
+              >
+                Day 2 &middot; Innovation Conclave (22 Sep)
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveDay(3)}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeDay === 3
+                    ? "bg-slate-900 text-white shadow-sm"
+                    : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
+                }`}
+              >
+                Day 3 &middot; &ldquo;Loop Out&rdquo; Finale (23 Sep)
+              </button>
+            </div>
+
+            {/* Active Day Description Strip */}
+            <div className="mb-8 p-4 rounded-xl bg-white border border-slate-200/90 text-center max-w-2xl mx-auto text-xs sm:text-[13px] text-slate-600">
+              {activeDay === 1 && (
+                <span>
+                  <strong className="text-slate-900 font-semibold">Day 1 Focus:</strong> Formal assembly, keynote address, and the official public launch of Q4Queue by Dr. Muhammed Abdul Hakim Azhari.
+                </span>
+              )}
+              {activeDay === 2 && (
+                <span>
+                  <strong className="text-slate-900 font-semibold">Day 2 Focus:</strong> Education symposium with industry leaders, educators, and technology panelists at Markaz Knowledge Garden.
+                </span>
+              )}
+              {activeDay === 3 && (
+                <span>
+                  <strong className="text-slate-900 font-semibold">Day 3 Focus:</strong> Grand festival conclusion, student innovation showcase, and community deliberations on the &ldquo;Loop Out&rdquo; philosophy.
+                </span>
+              )}
+            </div>
+
+            {/* Museum Exhibition Dual Gallery */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              
+              {/* Exhibit 1: Speakers & Official Inaugural Program */}
               <div
                 onClick={() =>
                   setActiveLightbox({
                     src: "/images/jazbayos-poster-speakers.png",
                     title: "Jazbayos 11th Edition &mdash; Dignitaries & Schedule",
-                    subtitle: "Markaz Knowledge Garden, Poonoor, Calicut",
-                    caption: "Official programme schedule featuring Dr. Muhammed Abdul Hakim Azhari and guest speakers.",
+                    subtitle: "Dihliz World School &middot; Markaz Knowledge Garden, Poonoor",
+                    caption: "Official festival programme featuring Dr. Muhammed Abdul Hakim Azhari, Musthafa P Errakkal, Asaf Nurani, Noufal Hassan Nurani, and distinguished guests.",
                   })
                 }
-                className="group rounded-2xl bg-white border border-slate-200 p-4 cursor-pointer hover:shadow-md transition-all duration-300 shadow-sm"
+                className="group rounded-2xl bg-white border border-slate-200/90 p-4 cursor-pointer hover:shadow-lg transition-all duration-300 shadow-sm"
               >
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5] bg-slate-100">
                   <Image
@@ -687,27 +750,30 @@ export default function LaunchPage() {
                     className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between p-2.5 rounded-lg bg-slate-900/85 backdrop-blur-md text-xs text-white">
-                    <span className="font-medium">Inaugural Guests &amp; Programme</span>
-                    <span className="inline-flex items-center gap-1 text-slate-300 text-[11px]">
-                      <Maximize2 className="w-3 h-3" /> View exhibit
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between p-3 rounded-xl bg-slate-900/90 backdrop-blur-md text-xs text-white">
+                    <div>
+                      <div className="font-semibold">Inaugural Guests &amp; Programme</div>
+                      <div className="text-[11px] text-slate-300">Dr. Azhari &amp; Distinguished Speakers</div>
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-amber-300 text-[11px] font-mono">
+                      <Maximize2 className="w-3.5 h-3.5" /> Inspect
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Exhibit 2: "Loop Out" Concept Artwork */}
+              {/* Exhibit 2: "Loop Out" Festival Concept Art */}
               <div
                 onClick={() =>
                   setActiveLightbox({
                     src: "/images/jazbayos-poster-eye.png",
                     title: "Jazbayos 11th Edition &mdash; 'Loop Out'",
-                    subtitle: "Official Theme Artwork",
-                    caption: "The iconic visual identity of Jazbayos 2026 &mdash; breaking out of repetitive routines through creative intellect.",
+                    subtitle: "Official Theme Artwork &middot; Dihliz Life Festival",
+                    caption: "The iconic visual identity of Jazbayos 2026 &mdash; breaking out of repetitive loops through creative intellect, mindful technology, and human purpose.",
                   })
                 }
-                className="group rounded-2xl bg-white border border-slate-200 p-4 cursor-pointer hover:shadow-md transition-all duration-300 shadow-sm"
+                className="group rounded-2xl bg-white border border-slate-200/90 p-4 cursor-pointer hover:shadow-lg transition-all duration-300 shadow-sm"
               >
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5] bg-slate-100">
                   <Image
@@ -717,24 +783,28 @@ export default function LaunchPage() {
                     className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between p-2.5 rounded-lg bg-slate-900/85 backdrop-blur-md text-xs text-white">
-                    <span className="font-medium">Theme Concept: &ldquo;Loop Out&rdquo;</span>
-                    <span className="inline-flex items-center gap-1 text-slate-300 text-[11px]">
-                      <Maximize2 className="w-3 h-3" /> View exhibit
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between p-3 rounded-xl bg-slate-900/90 backdrop-blur-md text-xs text-white">
+                    <div>
+                      <div className="font-semibold">Theme Concept: &ldquo;Loop Out&rdquo;</div>
+                      <div className="text-[11px] text-slate-300">Official Festival Identity</div>
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-emerald-300 text-[11px] font-mono">
+                      <Maximize2 className="w-3.5 h-3.5" /> Inspect
                     </span>
                   </div>
                 </div>
               </div>
+
             </div>
 
-            {/* Gallery Placard Strip */}
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2.5 mt-8 text-xs text-slate-500 font-mono">
-              <span className="inline-flex items-center gap-1.5">
+            {/* Gallery Placard Info */}
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-8 text-xs text-slate-500 font-mono">
+              <span className="flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-slate-400" />
                 21, 22 &amp; 23 September 2026
               </span>
-              <span className="inline-flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-slate-400" />
                 Dihliz World School, Markaz Garden, Poonoor
               </span>
@@ -742,42 +812,50 @@ export default function LaunchPage() {
           </motion.div>
         </section>
 
-        {/* ─── 5. Operational Reliability & Scale ─── */}
-        <section className="relative px-6 max-w-5xl mx-auto pb-24">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            <div className="p-5 rounded-xl bg-white border border-slate-200/90 text-center shadow-sm">
-              <div className="text-2xl sm:text-3xl font-bold text-slate-900 font-mono tabular-nums">&lt; 35ms</div>
-              <div className="text-xs text-slate-500 mt-1">Sync Latency</div>
+        {/* ─── 4. OPERATIONAL BENCHMARKS & SCALE ─── */}
+        <section className="relative px-6 sm:px-8 max-w-5xl mx-auto pb-24">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200/90 text-center shadow-sm">
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono tabular-nums">&lt; 35ms</div>
+              <div className="text-xs text-slate-500 mt-1 font-medium">Sync Latency</div>
             </div>
-            <div className="p-5 rounded-xl bg-white border border-slate-200/90 text-center shadow-sm">
-              <div className="text-2xl sm:text-3xl font-bold text-amber-700 font-mono tabular-nums">0 Apps</div>
-              <div className="text-xs text-slate-500 mt-1">Visitor App Downloads</div>
+            <div className="p-5 rounded-2xl bg-white border border-slate-200/90 text-center shadow-sm">
+              <div className="text-2xl sm:text-3xl font-extrabold text-amber-700 font-mono tabular-nums">0 Apps</div>
+              <div className="text-xs text-slate-500 mt-1 font-medium">Visitor App Installs</div>
             </div>
-            <div className="p-5 rounded-xl bg-white border border-slate-200/90 text-center shadow-sm">
-              <div className="text-2xl sm:text-3xl font-bold text-emerald-700 font-mono tabular-nums">99.98%</div>
-              <div className="text-xs text-slate-500 mt-1">Platform Uptime SLA</div>
+            <div className="p-5 rounded-2xl bg-white border border-slate-200/90 text-center shadow-sm">
+              <div className="text-2xl sm:text-3xl font-extrabold text-emerald-700 font-mono tabular-nums">99.98%</div>
+              <div className="text-xs text-slate-500 mt-1 font-medium">Platform Uptime SLA</div>
             </div>
-            <div className="p-5 rounded-xl bg-white border border-slate-200/90 text-center shadow-sm">
-              <div className="text-2xl sm:text-3xl font-bold text-blue-600 font-mono tabular-nums">100%</div>
-              <div className="text-xs text-slate-500 mt-1">Paperless Operations</div>
+            <div className="p-5 rounded-2xl bg-white border border-slate-200/90 text-center shadow-sm">
+              <div className="text-2xl sm:text-3xl font-extrabold text-blue-600 font-mono tabular-nums">100%</div>
+              <div className="text-xs text-slate-500 mt-1 font-medium">Paperless Flow</div>
             </div>
           </div>
         </section>
 
-        {/* ─── 6. Architectural Call to Action (Slate Navy Contrast Anchor) ─── */}
-        <section className="relative px-6 max-w-4xl mx-auto pb-28">
+        {/* ─── 5. ARCHITECTURAL CALL TO ACTION ─── */}
+        <section className="relative px-6 sm:px-8 max-w-4xl mx-auto pb-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6 }}
-            className="rounded-2xl bg-gradient-to-b from-[#0F172A] to-[#1E293B] text-white p-8 sm:p-12 text-center shadow-xl"
+            className="rounded-3xl bg-gradient-to-b from-[#0F172A] to-[#1E293B] text-white p-8 sm:p-12 text-center shadow-xl relative overflow-hidden"
           >
-            <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mb-3">
+            {/* Subtle radial glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[11px] font-mono uppercase tracking-wider mb-3">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Institutional Deployment</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">
               Deploy Q4Queue Across Your Organization
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed mb-7">
-              Clinics, hospitals, customer service centers, and high-footfall institutions can deploy digital queues in minutes. Start with full feature access for 14 days.
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed mb-8">
+              Hospitals, clinics, educational campuses, and customer service centers can set up quiet, paperless digital queues in minutes. Start with full features for 14 days.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
@@ -792,15 +870,15 @@ export default function LaunchPage() {
                 href="/"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[14px] font-semibold transition-all"
               >
-                <span>Return to Home</span>
+                <span>Return to Homepage</span>
               </Link>
             </div>
           </motion.div>
         </section>
 
-        {/* ─── 7. Commemorative Footnote ─── */}
-        <div className="border-t border-slate-200/80 bg-[#F4F3F0] py-6 px-6 text-center">
-          <p className="text-xs text-slate-500 font-medium">
+        {/* ─── 6. COMMEMORATIVE FOOTNOTE ─── */}
+        <div className="border-t border-slate-200/80 bg-[#F4F3F0] py-7 px-6 text-center">
+          <p className="text-xs text-slate-500 font-medium max-w-3xl mx-auto leading-relaxed">
             Inaugurated on 21 September 2026 at the 11th Jazbayos &mdash; Dihliz Life Festival &middot; Dihliz World School &middot; Markaz Knowledge Garden, Poonoor, Calicut.
           </p>
         </div>
@@ -809,7 +887,7 @@ export default function LaunchPage() {
       {/* Standard Site Footer */}
       <Footer />
 
-      {/* ─── Lightbox Modal ─── */}
+      {/* ─── High-Resolution Lightbox Modal ─── */}
       <AnimatePresence>
         {activeLightbox && (
           <motion.div
@@ -829,14 +907,14 @@ export default function LaunchPage() {
             </button>
 
             <motion.div
-              initial={{ scale: 0.94, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.94, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-2xl w-full max-h-[88vh] flex flex-col rounded-2xl bg-slate-900 border border-white/20 overflow-hidden shadow-2xl"
+              className="relative max-w-2xl w-full max-h-[90vh] flex flex-col rounded-2xl bg-slate-900 border border-white/20 overflow-hidden shadow-2xl"
             >
-              <div className="relative flex-1 min-h-[50vh] sm:min-h-[60vh] bg-black flex items-center justify-center p-2">
+              <div className="relative flex-1 min-h-[50vh] sm:min-h-[62vh] bg-black flex items-center justify-center p-2">
                 <Image
                   src={activeLightbox.src}
                   alt={activeLightbox.title}
@@ -853,7 +931,7 @@ export default function LaunchPage() {
                 <p className="text-xs text-amber-300 font-medium mt-0.5">
                   {activeLightbox.subtitle}
                 </p>
-                <p className="text-xs text-slate-400 mt-1.5">
+                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
                   {activeLightbox.caption}
                 </p>
               </div>
