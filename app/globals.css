@@ -113,4 +113,23 @@
   .animate-marquee:hover {
     animation-play-state: paused;
   }
+
+  /* Confetti fall animation for launch page */
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+    25% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) translateX(var(--confetti-drift, 0px)) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-confetti-fall {
+    animation: confetti-fall 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
 }

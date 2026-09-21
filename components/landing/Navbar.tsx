@@ -205,6 +205,18 @@ export default function Navbar() {
           >
             Pricing
           </Link>
+
+          <Link
+            href="/launch"
+            className={cn(
+              "text-[14px] font-semibold transition-colors",
+              isLightNav
+                ? "text-indigo-600 hover:text-indigo-700"
+                : "text-amber-300 hover:text-amber-200"
+            )}
+          >
+            🎉 Launch
+          </Link>
         </nav>
 
         {/* Right: Actions */}
@@ -311,6 +323,13 @@ export default function Navbar() {
             className="block py-2 text-base font-medium"
           >
             Pricing
+          </Link>
+          <Link
+            href="/launch"
+            onClick={() => setMobileOpen(false)}
+            className="block py-2 text-base font-semibold text-indigo-600"
+          >
+            🎉 Launch
           </Link>
 
           <div className="pt-4 border-t border-slate-100/20 flex flex-col gap-3">
