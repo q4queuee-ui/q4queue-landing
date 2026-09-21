@@ -2,7 +2,7 @@ import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
 import TrustBar from "@/components/landing/TrustBar";
 import CustomerSpotlight from "@/components/landing/CustomerSpotlight";
-import Industries from "@/components/landing/Industries";
+import Features from "@/components/landing/Features";
 import HowItWorks from "@/components/landing/HowItWorks";
 import CustomerExperience from "@/components/landing/CustomerExperience";
 import BusinessValue from "@/components/landing/BusinessValue";
@@ -19,6 +19,7 @@ export default function Home() {
         <Hero />
         <TrustBar />
         <CustomerSpotlight />
+        <Features />
         <HowItWorks />
         <CustomerExperience />
         <BusinessValue />
